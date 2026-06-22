@@ -1,0 +1,86 @@
+gantt
+    title Cronograma Marc.IA — Sprints e Tarefas
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+
+    section Marcos
+    E1 Proposta (entregue)         :milestone, m1, 2026-06-18, 0d
+    E2 Checkpoint                  :milestone, m2, 2026-06-25, 0d
+    E3 Final + Mostra              :milestone, m3, 2026-07-10, 0d
+
+    section FUND — Fundacao
+    FUND-01 venv + gitignore       :done, fund01, 2026-06-18, 1d
+    FUND-02 requirements.txt       :done, fund02, 2026-06-18, 1d
+
+    section DEC — Decisoes
+    DEC-01 Modelo API              :done, dec01, 2026-06-18, 1d
+    DEC-02 API key billing         :done, dec02, 2026-06-18, 1d
+    DEC-03 Google OAuth creds      :dec03, 2026-06-27, 1d
+
+    section NUC — Nucleo
+    NUC-01 Classe Sessao (JSON)    :done, nuc01, 2026-06-19, 1d
+    NUC-02 app.py minimo           :done, nuc02, 2026-06-19, 1d
+    NUC-04 Rota loader             :nuc04, 2026-06-23, 2d
+    NUC-05 Progresso XP/nivel      :nuc05, 2026-06-27, 1d
+    NUC-06 SQLAlchemy setup        :nuc06, 2026-06-26, 1d
+    NUC-07 Migrar Sessao p/ banco  :nuc07, 2026-06-27, 1d
+
+    section AUTH — Autenticacao
+    AUTH-01 OAuth config            :auth01, 2026-06-27, 1d
+    AUTH-02 Flask-Login + Authlib   :auth02, 2026-06-28, 1d
+    AUTH-03 Sessao por google_id   :auth03, 2026-06-28, 1d
+
+    section AGE — Agentes
+    AGE-01 AgentBase               :done, age01, 2026-06-19, 1d
+    AGE-02 AgenteIP                :done, age02, 2026-06-19, 1d
+    AGE-03 Integracao app-agente   :done, age03, 2026-06-20, 1d
+    AGE-04 Historico no prompt     :age04, 2026-06-23, 1d
+    AGE-05 Prompt adaptativo       :age05, 2026-07-01, 2d
+
+    section CONT — Conteudo
+    CONT-01 plano.json             :done, cont01, 2026-06-19, 1d
+    CONT-02 exercicios.json        :cont02, 2026-07-01, 2d
+    CONT-03 KB materiais IP        :cont03, 2026-06-28, 2d
+
+    section RAG
+    RAG-01 Indexador               :rag01, 2026-06-29, 1d
+    RAG-02 Retriever               :rag02, 2026-06-30, 1d
+    RAG-03 Integracao RAG-Agente   :rag03, 2026-06-30, 1d
+
+    section FRO — Front-end
+    FRO-01 index.html              :done, fro01, 2026-06-19, 1d
+    FRO-02 style.css               :done, fro02, 2026-06-19, 1d
+    FRO-03 chat.js                 :done, fro03, 2026-06-20, 1d
+    FRO-04 Painel rota dinamico    :fro04, 2026-06-24, 1d
+    FRO-04b Navegacao livre        :fro04b, 2026-07-02, 1d
+    FRO-05 Exercicio inline        :fro05, 2026-07-02, 1d
+    FRO-06 UI de feedback          :fro06, 2026-07-04, 1d
+    FRO-07 Responsivo mobile       :fro07, 2026-07-08, 1d
+    FRO-08 Loading states          :fro08, 2026-07-08, 1d
+
+    section MET — Metricas
+    MET-01 Feedback por resposta   :met01, 2026-07-04, 1d
+    MET-02 NPS + Sean Ellis        :met02, 2026-07-05, 1d
+
+    section QA — Testes
+    QA-01 pytest + conftest        :qa01, 2026-07-05, 1d
+    QA-02 Testes unitarios 50%     :qa02, 2026-07-06, 2d
+    QA-03 Validacao input          :qa03, 2026-07-05, 1d
+    POL-01 Tratamento erros        :pol01, 2026-07-08, 1d
+    POL-02 Garantir while          :pol02, 2026-07-09, 1d
+    POL-03 Garantir tupla          :pol03, 2026-07-09, 1d
+
+    section MOS — Deploy
+    MOS-01 Deploy Railway          :mos01, 2026-07-07, 1d
+    MOS-02 PostgreSQL Railway      :mos02, 2026-07-07, 1d
+    MOS-03 Variaveis env           :mos03, 2026-07-08, 1d
+
+    section DOC — Documentacao
+    DOC-E1 Proposta (entregue)     :done, doce1, 2026-06-18, 1d
+    DOC-UP Upstream/PRD/ADR/SDD    :done, docup, 2026-06-21, 2d
+    DOC-01 Relatorio E2            :doc01, 2026-06-24, 1d
+    DOC-02 Video E2                :doc02, 2026-06-25, 1d
+    DOC-03 README final            :doc03, 2026-07-08, 2d
+    DOC-04 Doc tecnica 3-5p        :doc04, 2026-07-09, 1d
+    DOC-05 Poster A1               :doc05, 2026-07-09, 1d
+    DOC-06 Video final             :doc06, 2026-07-10, 1d

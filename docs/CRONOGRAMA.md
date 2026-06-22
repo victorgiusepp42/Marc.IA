@@ -9,8 +9,36 @@
 
 | Entrega | Data | Tipo | Foco |
 |---|---|---|---|
+| E1 | 18/06/2026 | Proposta (entregue) | Documento de proposta do projeto |
 | E2 | 25/06/2026 | Checkpoint (progresso) | App funcional + docs do planejamento |
 | E3 | ~10/07/2026 | Final (nota) | Produto completo + apresentacao Mostra |
+
+---
+
+## Entregas Concluidas
+
+### E1 — Proposta (18/06/2026) ✅
+
+| Entrega | Link |
+|---|---|
+| Documento de proposta | [Google Drive](https://drive.google.com/drive/folders/) |
+| Repositorio criado | [GitHub](https://github.com/victorgiusepp42/Marc.IA) |
+
+### Upstream / Planejamento (21-22/06/2026) ✅
+
+| Entrega | Link |
+|---|---|
+| PRD — Product Requirements Document | [docs/PRD.md](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/PRD.md) |
+| ADR — Architecture Decision Records | [docs/ADR.md](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/ADR.md) |
+| SDD — Software Design Document | [docs/SDD.md](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/SDD.md) |
+| Cronograma detalhado | [docs/CRONOGRAMA.md](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/CRONOGRAMA.md) |
+| Diagrama de arquitetura | [docs/diagramas/diagrama_arquitetura.mmd](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/diagramas/diagrama_arquitetura.mmd) |
+| Diagrama de fluxo de mensagem | [docs/diagramas/diagrama_fluxo_mensagem.mmd](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/diagramas/diagrama_fluxo_mensagem.mmd) |
+| Diagrama de dependencias | [docs/diagramas/diagrama_dependencias.mmd](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/diagramas/diagrama_dependencias.mmd) |
+| Diagrama de jornada do usuario | [docs/diagramas/diagrama_jornada_usuario.mmd](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/diagramas/diagrama_jornada_usuario.mmd) |
+| Diagrama de cronograma (Gantt) | [docs/diagramas/diagrama_cronograma.mmd](https://github.com/victorgiusepp42/Marc.IA/blob/main/docs/diagramas/diagrama_cronograma.mmd) |
+| README atualizado | [README.md](https://github.com/victorgiusepp42/Marc.IA/blob/main/README.md) |
+| Issues + Labels no GitHub Projects | [Project Board](https://github.com/users/victorgiusepp42/projects/1) |
 
 ---
 
