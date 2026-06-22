@@ -1,0 +1,126 @@
+flowchart LR
+    %% Fundação
+    FUND01[FUND-01 Python]
+    FUND02[FUND-02 Git]
+    FUND03[FUND-03 Pastas]
+    FUND04[FUND-04 venv]
+    FUND05[FUND-05 gitignore]
+    FUND06[FUND-06 Fluxo Git]
+
+    %% Decisões
+    DEC01[DEC-01 Modelo Opus 4.8 + Sonnet 4.6]
+    DEC02[DEC-02 API key]
+    DEC03[DEC-03 Google OAuth credentials]
+
+    %% Núcleo
+    NUC01[NUC-01 Sessao]
+    NUC02[NUC-02 app.py]
+    NUC03[NUC-03 database.py - SQLAlchemy]
+    NUC04[NUC-04 Rota loader]
+    NUC05[NUC-05 Progresso]
+
+    %% Autenticação
+    AUTH01[AUTH-01 Google OAuth config]
+    AUTH02[AUTH-02 Flask-Login + Authlib]
+    AUTH03[AUTH-03 Sessão por google_id]
+
+    %% Agentes
+    AGE01[AGE-01 AgentBase]
+    AGE02[AGE-02 AgenteIP]
+    AGE03[AGE-03 Integração]
+    AGE04[AGE-04 try/except + retry]
+    AGE05[AGE-05 Prompt adaptativo]
+
+    %% Conteúdo
+    CONT01[CONT-01 plano.json]
+    CONT02[CONT-02 exercicios.json]
+    CONT03[CONT-03 exercicios.py]
+    CONT04[CONT-04 KB materiais]
+
+    %% RAG
+    RAG01[RAG-01 Indexador]
+    RAG02[RAG-02 Retriever]
+    RAG03[RAG-03 RAG Agente]
+
+    %% Front-end
+    FRO01[FRO-01 index.html]
+    FRO02[FRO-02 style.css]
+    FRO03[FRO-03 chat.js]
+    FRO04[FRO-04 Painel rota]
+    FRO05[FRO-05 Exercício]
+    FRO06[FRO-06 Feedback UI]
+
+    %% Métricas
+    MET01[MET-01 Feedback por resposta]
+    MET02[MET-02 NPS + Sean Ellis]
+
+    %% QA e Deploy
+    QA01[QA-01 pytest + coverage]
+    MOS01[MOS-01 Deploy Railway + PostgreSQL]
+
+    %% Dependências Fundação
+    FUND01 --> FUND02
+    FUND02 --> FUND03
+    FUND02 --> FUND06
+    FUND03 --> FUND04
+    FUND03 --> FUND05
+    FUND03 --> CONT01
+    FUND03 --> FRO01
+    FUND04 --> NUC01
+    FUND04 --> NUC02
+    FUND04 --> AGE01
+    FUND04 --> NUC03
+
+    %% Dependências Database
+    NUC03 --> NUC01
+    NUC03 --> AUTH03
+    NUC03 --> MET01
+    NUC03 --> MET02
+
+    %% Dependências Auth
+    DEC03 --> AUTH01
+    AUTH01 --> AUTH02
+    AUTH02 --> AUTH03
+    AUTH03 --> NUC01
+    NUC02 --> AUTH02
+
+    %% Dependências Agentes
+    DEC01 --> AGE01
+    DEC02 --> AGE01
+    AGE01 --> AGE02
+    NUC01 --> AGE03
+    NUC02 --> AGE03
+    AGE02 --> AGE03
+    AGE03 --> AGE04
+    AGE02 --> AGE05
+
+    %% Dependências Front
+    FRO01 --> FRO02
+    FRO01 --> FRO03
+    NUC02 --> FRO03
+    FRO03 --> FRO06
+
+    %% Dependências Núcleo
+    CONT01 --> NUC04
+    NUC01 --> NUC05
+
+    %% Dependências Conteúdo/RAG
+    FUND03 --> CONT02
+    CONT02 --> CONT03
+    CONT04 --> RAG01
+    RAG01 --> RAG02
+    RAG02 --> RAG03
+    AGE04 --> RAG03
+
+    %% Dependências Front avançado
+    NUC04 --> FRO04
+    CONT02 --> FRO05
+
+    %% Dependências Métricas
+    FRO06 --> MET01
+    AUTH03 --> MET02
+
+    %% Deploy depende de tudo
+    AGE03 --> MOS01
+    NUC03 --> MOS01
+    QA01 --> MOS01

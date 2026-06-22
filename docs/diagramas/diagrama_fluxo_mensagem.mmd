@@ -1,0 +1,43 @@
+sequenceDiagram
+    participant A as Aluno
+    participant J as chat.js
+    participant F as app.py
+    participant G as Google OAuth
+    participant DB as Banco (SQLAlchemy)
+    participant AG as AgenteIP
+    participant R as Retriever (RAG)
+    participant C as API Claude
+
+    Note over A,G: Autenticação (primeiro acesso)
+    A->>F: Acessa /
+    F->>F: Verifica sessão Flask
+    F-->>A: Redireciona para /login
+    A->>G: Login com Google
+    G-->>F: Token + email + nome
+    F->>DB: Cria/carrega usuário por google_id
+    F-->>A: Redireciona para / (autenticado)
+
+    Note over A,C: Fluxo de mensagem
+    A->>J: Digita pergunta
+    J->>J: Valida input
+    J->>J: Renderiza bolha user
+    J->>J: Mostra "pensando..."
+    J->>F: POST /chat {mensagem}
+    F->>F: Valida tamanho (max 2000 chars)
+    F->>DB: Carrega sessão (histórico + XP + nível)
+    DB-->>F: SessaoEstudo
+    F->>AG: responder(msg, sessao)
+    AG->>R: buscar_contexto(msg)
+    R-->>AG: Top-3 chunks relevantes
+    AG->>AG: _montar_messages (histórico + chunks + system_prompt)
+    AG->>C: messages.create(model="claude-opus-4-8", effort="medium")
+    Note over AG,C: Retry 5x com backoff — Fallback: Sonnet 4.6
+    C-->>AG: Resposta
+    AG->>AG: _extrair_texto()
+    AG-->>F: texto
+    F->>DB: adicionar_mensagem + XP
+    F->>DB: salvar sessão
+    F-->>J: JSON {resposta, pontos, nivel}
+    J->>J: Remove "pensando..."
+    J->>J: Renderiza bolha assistant
+    J->>J: Atualiza XP/nível na sidebar

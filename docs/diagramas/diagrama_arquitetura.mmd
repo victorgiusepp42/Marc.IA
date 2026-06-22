@@ -1,0 +1,70 @@
+graph TD
+    %% INICIO
+    A(["Aluno abre o site no navegador"])
+    A --> AUTH{"Está autenticado?"}
+
+    %% Autenticacao
+    AUTH -->|"Não"| AUTH1["Redireciona para Google OAuth"]
+    AUTH1 --> AUTH2["Aluno faz login com @discente.ufcat.edu.br"]
+    AUTH2 --> AUTH3["Google retorna token + perfil"]
+    AUTH3 --> AUTH4["app.py valida token e cria sessão Flask"]
+    AUTH4 --> B
+    AUTH -->|"Sim"| B
+
+    B["index.html + style.css + chat.js carregam"]
+    B --> C(["Aluno digita pergunta e clica Enviar"])
+
+    %% Envio
+    C --> D["chat.js envia POST /chat para o servidor"]
+    D --> E["app.py recebe a mensagem"]
+
+    %% Validacao
+    E --> F{"Mensagem vazia ou muito longa?"}
+    F -->|"Sim"| G["Retorna erro 400 para o navegador"]
+    F -->|"Não"| H["Carrega sessão do aluno via Google ID — database.py"]
+
+    %% Sessao
+    H --> I{"Sessão existe no banco?"}
+    I -->|"Sim"| J["Carrega histórico + XP do banco (SQLAlchemy)"]
+    I -->|"Não"| K["Cria sessão nova zerada no banco"]
+    J --> L["Passa mensagem para o tutor IA"]
+    K --> L
+
+    %% Tutor
+    L --> M["agente_ip.py recebe a pergunta"]
+    M --> N["Herda de agente_base.py"]
+    N --> O["Monta histórico — últimas 10 mensagens"]
+    O --> P["Aplica system_prompt — persona PyAI Professor"]
+    P --> RAG{"RAG disponível?"}
+    RAG -->|"Sim"| RAG1["retriever.py busca top-3 chunks relevantes"]
+    RAG1 --> Q
+    RAG -->|"Não"| Q
+    Q["Chama API Anthropic — Claude Opus 4.8 (effort medium)"]
+
+    %% Decisao de API
+    Q --> R{"API respondeu?"}
+    R -->|"Sim"| S["Resposta do Claude"]
+    R -->|"Não — erro/timeout"| T{"Tentou 5 vezes?"}
+    T -->|"Não"| U["Espera com backoff exponencial e tenta de novo"]
+    U --> Q
+    T -->|"Sim"| V{"Fallback ativo?"}
+    V -->|"Sim"| W["Troca para Claude Sonnet 4.6 (effort medium)"]
+    W --> Q
+    V -->|"Não"| X["Retorna mensagem de erro amigável"]
+
+    %% Pos-resposta
+    S --> Y["Salva pergunta + resposta no histórico (banco)"]
+    Y --> Z["Adiciona +5 XP ao aluno"]
+    Z --> AA{"Subiu de nível?"}
+    AA -->|"Sim"| AB["Atualiza nível: Aprendiz/Intermediário/Avançado/Mestre"]
+    AA -->|"Não"| AC["Mantém nível atual"]
+    AB --> AD["Persiste sessão no banco via SQLAlchemy"]
+    AC --> AD
+
+    %% Retorno
+    AD --> AE["Envia JSON com resposta + pontos + nível"]
+    AE --> AF["chat.js recebe e renderiza bolha do tutor"]
+    AF --> AG(["Aluno lê a resposta e pode continuar conversando"])
+
+    %% Dados laterais
+    E -->|"GET /rota"| AH[("data/plano.json — tópicos de IP")]

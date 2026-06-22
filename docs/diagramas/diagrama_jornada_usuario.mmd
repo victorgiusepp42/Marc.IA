@@ -1,0 +1,93 @@
+graph TD
+    %% ENTRADA
+    START(["Aluno acessa Marc.IA"])
+    START --> AUTH{"Primeiro acesso?"}
+
+    %% Autenticação
+    AUTH -->|"Sim"| LOGIN["Login com Google (@discente.ufcat.edu.br)"]
+    LOGIN --> PERFIL["Sistema cria perfil no banco"]
+    PERFIL --> BOAS["Tutor dá boas-vindas e explica a plataforma"]
+    BOAS --> ESCOLHA
+
+    AUTH -->|"Não (já logado)"| RETORNO["Carrega sessão anterior (XP, nível, tópico)"]
+    RETORNO --> ESCOLHA
+
+    %% Decisão de caminho baseada na persona
+    ESCOLHA{"Como o aluno quer usar?"}
+
+    %% === CAMINHO A: Aluno Perdido ===
+    ESCOLHA -->|"Não sabe por onde começar"| ROTA["Abre painel da ROTA"]
+    ROTA --> TOPICO1["Vê lista de tópicos com status"]
+    TOPICO1 --> PRIMEIRO["Clica no primeiro tópico não concluído"]
+    PRIMEIRO --> CONTEXTO["Tutor inicia no contexto do tópico"]
+    CONTEXTO --> ESTUDO_GUIADO
+
+    %% === CAMINHO B: Aluno Intermediário ===
+    ESCOLHA -->|"Sabe o que precisa"| NAVEGA["Navega pela rota livremente"]
+    NAVEGA --> PULA["Pula tópicos que já domina"]
+    PULA --> SELECIONA["Seleciona tópico específico onde trava"]
+    SELECIONA --> CONTEXTO
+
+    %% === CAMINHO C: Aluno Avançado ===
+    ESCOLHA -->|"Quer usar só o chat"| CHAT_DIRETO["Ignora a rota, vai direto pro chat"]
+    CHAT_DIRETO --> PERGUNTA_LIVRE["Faz pergunta aberta sobre IP"]
+    PERGUNTA_LIVRE --> TUTOR_RESPONDE
+
+    %% Fluxo de estudo guiado
+    ESTUDO_GUIADO["Aluno pergunta sobre o tópico"]
+    ESTUDO_GUIADO --> TUTOR_RESPONDE
+
+    %% Lógica adaptativa do tutor
+    TUTOR_RESPONDE["Tutor responde com contexto da disciplina (RAG)"]
+    TUTOR_RESPONDE --> ENTENDEU{"Aluno entendeu?"}
+
+    ENTENDEU -->|"Sim"| EXERCICIO{"Tutor propõe exercício?"}
+    EXERCICIO -->|"Sim"| FAZ_EX["Aluno tenta exercício"]
+    EXERCICIO -->|"Não"| CONTINUA["Aluno continua perguntando"]
+    CONTINUA --> TUTOR_RESPONDE
+
+    ENTENDEU -->|"Não, mas quer tentar"| TUTOR_GUIA["Tutor guia com perguntas e dicas"]
+    TUTOR_GUIA --> ENTENDEU2{"Entendeu agora?"}
+    ENTENDEU2 -->|"Sim"| EXERCICIO
+    ENTENDEU2 -->|"Ainda não"| DA_RESPOSTA["Tutor entrega a resposta + explica"]
+    DA_RESPOSTA --> EXERCICIO_ALT["Propõe exercício equivalente"]
+
+    ENTENDEU -->|"Pede resposta direto"| DA_DIRETO["Tutor dá resposta sem resistência + explica"]
+    DA_DIRETO --> SUGERE["Sugere exercício (aluno pode recusar)"]
+    SUGERE --> ACEITA{"Aceita exercício?"}
+    ACEITA -->|"Sim"| FAZ_EX
+    ACEITA -->|"Não"| CONTINUA
+
+    %% Exercícios
+    FAZ_EX --> RESULTADO{"Resultado"}
+    RESULTADO -->|"Correto"| XP_50["+ 50 XP — Tutor celebra"]
+    RESULTADO -->|"Parcial"| XP_20["+ 20 XP — Tutor explica o que faltou"]
+    RESULTADO -->|"Errado"| TUTOR_EXPLICA["Tutor explica o erro, sugere nova tentativa"]
+    TUTOR_EXPLICA --> FAZ_EX
+
+    EXERCICIO_ALT --> FAZ_EX
+
+    %% Progressão
+    XP_50 --> NIVEL{"Subiu de nível?"}
+    XP_20 --> NIVEL
+    NIVEL -->|"Sim"| CELEBRA["🎉 Nível atualizado na interface"]
+    NIVEL -->|"Não"| PROXIMO
+    CELEBRA --> PROXIMO
+
+    %% Próximo passo
+    PROXIMO{"O que o aluno faz agora?"}
+    PROXIMO -->|"Continua no tópico"| ESTUDO_GUIADO
+    PROXIMO -->|"Avança pra próximo tópico"| TOPICO_NEXT["Próximo tópico da rota"]
+    PROXIMO -->|"Volta pra tópico anterior"| NAVEGA
+    PROXIMO -->|"Encerra sessão"| FIM
+
+    TOPICO_NEXT --> CONTEXTO
+
+    %% Fim
+    FIM(["Sessão salva — progresso persistido no banco"])
+
+    %% Métricas coletadas ao longo da jornada
+    FIM --> METRICS["Métricas registradas: msgs, XP, tempo, feedback"]
+    METRICS --> NPS{"A cada N sessões"}
+    NPS --> NPS_Q["'De 0-10, recomendaria o Marc.IA?'"]
+    NPS --> ELLIS["'Se o Marc.IA parasse de existir, como se sentiria?'"]
