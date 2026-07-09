@@ -1,0 +1,988 @@
+{
+  "_meta": {
+    "descricao": "Catálogo estático de exercícios do Marc.IA. Esqueleto FRO-05 (08/07/2026) + Lista 2 (11 portugol) + Lista 5 (15 python). Total: 28 exercícios.",
+    "schema": {
+      "id": "string slug único",
+      "topico_id": "string — amarra ao data/plano.json | Mapeamento Lista 2 → alg-condicionais/alg-lacos | Mapeamento Lista 5 → py-variaveis/py-funcoes/py-condicionais/py-recursao/py-lacos-for/py-listas-tuplas",
+      "lista_origem": "string legível — fonte da lista do professor",
+      "numero": "int — posição na lista original",
+      "titulo": "string curta",
+      "enunciado": "string markdown leve (multiline)",
+      "linguagem": "portugol | python",
+      "entrada_exemplo": "string — exemplo de input(s)",
+      "saida_esperada": "string — output esperado",
+      "gabarito_resumo": "string — resumo conceitual",
+      "gabarito_completo": "string com código da solução",
+      "criterios_keywords": {
+        "obrigatorias": "lista de strings (lowercase) — todas DEVEM aparecer",
+        "desejaveis": "lista de strings (lowercase) — somam pontos bônus",
+        "negativas": "lista de strings (lowercase) — penalizam se aparecerem (linguagem errada)"
+      }
+    },
+    "total": 28
+  },
+  "exercicios": [
+    {
+      "id": "ex-alg-triangulo",
+      "topico_id": "alg-condicionais",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 1,
+      "titulo": "Triângulo ou Não Triângulo",
+      "enunciado": "Leia três valores reais A, B e C que representam os comprimentos dos lados de um triângulo.\n\nVerifique se eles formam um triângulo válido. Para ser válido, o comprimento de cada lado deve ser menor que a soma dos outros dois.\n\nSe for válido, classifique o triângulo como:\n- Equilátero: os três lados são iguais\n- Isósceles: exatamente dois lados são iguais\n- Escaleno: os três lados são diferentes\n\n💡 Dica: Use SE encadeado — primeiro valide o triângulo, depois classifique.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "Lado A: 3\nLado B: 4\nLado C: 5",
+      "saida_esperada": "Os lados formam um triângulo.\nClassificação: Escaleno",
+      "gabarito_resumo": "Validar com (A<B+C) e (B<A+C) e (C<A+B); depois comparar combinações de igualdade para classificar.",
+      "gabarito_completo": "algoritmo \"triangulo\"\nvar\n  A, B, C: real\ninicio\n  escreva(\"Lado A: \")\n  leia(A)\n  escreva(\"Lado B: \")\n  leia(B)\n  escreva(\"Lado C: \")\n  leia(C)\n  se (A < B + C) e (B < A + C) e (C < A + B) entao\n    escreva(\"Os lados formam um triângulo.\")\n    se (A = B) e (B = C) entao\n      escreva(\"Classificação: Equilátero\")\n    senao\n      se (A = B) ou (A = C) ou (B = C) entao\n        escreva(\"Classificação: Isósceles\")\n      senao\n        escreva(\"Classificação: Escaleno\")\n      fimse\n    fimse\n  senao\n    escreva(\"Os lados NÃO formam um triângulo.\")\n  fimse\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva"
+        ],
+        "desejaveis": [
+          "equilatero",
+          "isosceles",
+          "escaleno",
+          "senao",
+          "fimse",
+          "triangulo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "if ",
+          "else:"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-imc",
+      "topico_id": "py-variaveis",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 1,
+      "titulo": "Calculadora de IMC",
+      "enunciado": "Solicite ao usuário seu peso (kg) e altura (m). Calcule e exiba o IMC usando a fórmula:\n\n   IMC = peso / altura²\n\nExiba com 2 casas decimais e a classificação: Abaixo do peso (<18,5), Normal (18,5-24,9), Sobrepeso (25-29,9) ou Obeso (>=30).\n\n💡 Dica: Use float(input(...)) para ler números reais e f\"{valor:.2f}\" para formatar.",
+      "linguagem": "python",
+      "entrada_exemplo": "Peso: 70\nAltura: 1.75",
+      "saida_esperada": "IMC: 22.86\nClassificacao: Normal",
+      "gabarito_resumo": "Ler peso e altura como float, calcular peso/(altura**2), formatar com 2 casas e classificar por faixas.",
+      "gabarito_completo": "peso = float(input(\"Peso: \"))\naltura = float(input(\"Altura: \"))\nimc = peso / (altura ** 2)\nprint(f\"IMC: {imc:.2f}\")\nif imc < 18.5:\n    print(\"Classificacao: Abaixo do peso\")\nelif imc < 25:\n    print(\"Classificacao: Normal\")\nelif imc < 30:\n    print(\"Classificacao: Sobrepeso\")\nelse:\n    print(\"Classificacao: Obeso\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "input",
+          "print",
+          "float"
+        ],
+        "desejaveis": [
+          "altura",
+          "peso",
+          "imc",
+          "**",
+          ".2f",
+          "if",
+          "elif",
+          "else"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-triangulo-classificacao",
+      "topico_id": "alg-condicionais",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 1,
+      "titulo": "TrianguloOuNaoTriangulo",
+      "enunciado": "Leia três valores reais A, B e C que representam os comprimentos dos lados de um triângulo. Verifique se eles formam um triângulo válido. Para ser válido, o comprimento de cada lado deve ser menor que a soma dos outros dois. Se for válido, classifique o triângulo como:\n- Equilátero: os três lados são iguais\n- Isósceles: exatamente dois lados são iguais\n- Escaleno: os três lados são diferentes\n\nDica: Use SE encadeado: primeiro valide o triângulo, depois classifique.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "3, 4, 5",
+      "saida_esperada": "Triângulo válido: Escaleno",
+      "gabarito_resumo": "Validar triângulo com SE/SENAO (A<B+C e B<A+C e C<A+B); em seguida classificar com SE encadeado em equilátero, isósceles ou escaleno.",
+      "gabarito_completo": "algoritmo \"TrianguloOuNaoTriangulo\"\nvar\n  A, B, C: real\ninicio\n  leia(A, B, C)\n  se (A < B + C) e (B < A + C) e (C < A + B) entao\n    se (A = B) e (B = C) entao\n      escreva(\"Triângulo Equilátero\")\n    senao\n      se (A = B) ou (A = C) ou (B = C) entao\n        escreva(\"Triângulo Isósceles\")\n      senao\n        escreva(\"Triângulo Escaleno\")\n      fimse\n    fimse\n  senao\n    escreva(\"Não forma um triângulo\")\n  fimse\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "senao",
+          "leia",
+          "escreva",
+          "fimse"
+        ],
+        "desejaveis": [
+          "var",
+          "real",
+          "inicio",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-dia-semana",
+      "topico_id": "alg-condicionais",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 2,
+      "titulo": "DiaDaSemanaPorExtenso",
+      "enunciado": "Leia um número de 1 a 7 e escreva o dia da semana correspondente por extenso:\n1 = Segunda-feira, 2 = Terça-feira, 3 = Quarta-feira,\n4 = Quinta-feira, 5 = Sexta-feira, 6 = Sábado, 7 = Domingo.\nSe o valor informado estiver fora do intervalo de 1 a 7, exiba: \"Dia inválido!\".\n\nDica: Utilize CASO SELECIONE para mapear cada número ao dia correspondente.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "3",
+      "saida_esperada": "Quarta-feira",
+      "gabarito_resumo": "Ler um inteiro de 1 a 7 e usar CASO SELECIONE para imprimir o dia por extenso; caso contrário escrever \"Dia inválido!\".",
+      "gabarito_completo": "algoritmo \"DiaDaSemanaPorExtenso\"\nvar\n  dia: inteiro\ninicio\n  leia(dia)\n  escolha dia\n    caso 1\n      escreva(\"Segunda-feira\")\n    caso 2\n      escreva(\"Terça-feira\")\n    caso 3\n      escreva(\"Quarta-feira\")\n    caso 4\n      escreva(\"Quinta-feira\")\n    caso 5\n      escreva(\"Sexta-feira\")\n    caso 6\n      escreva(\"Sábado\")\n    caso 7\n      escreva(\"Domingo\")\n    outrocaso\n      escreva(\"Dia inválido!\")\n  fimescolha\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "caso",
+          "escolha"
+        ],
+        "desejaveis": [
+          "outrocaso",
+          "fimescolha",
+          "inteiro",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-reajuste-salarial",
+      "topico_id": "alg-condicionais",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 3,
+      "titulo": "ReajusteSalarial",
+      "enunciado": "Uma empresa concederá reajuste salarial de acordo com o salário atual do funcionário:\n- Salário até R$ 1.000,00 — reajuste de 15%\n- Salário entre R$ 1.000,01 e R$ 2.500,00 — reajuste de 10%\n- Salário acima de R$ 2.500,00 — reajuste de 5%\n\nLeia o salário atual e exiba o novo salário após o reajuste.\n\nDica: Calcule o novo salário multiplicando pelo fator (ex: salario * 1.15).",
+      "linguagem": "portugol",
+      "entrada_exemplo": "1500.00",
+      "saida_esperada": "Novo salário: R$ 1650.00",
+      "gabarito_resumo": "Ler salário e aplicar SE/SENAO encadeado: até 1000 -> 15%; até 2500 -> 10%; acima -> 5%. Mostrar o novo salário.",
+      "gabarito_completo": "algoritmo \"ReajusteSalarial\"\nvar\n  salario, novoSalario: real\ninicio\n  leia(salario)\n  se salario <= 1000 entao\n    novoSalario <- salario * 1.15\n  senao\n    se salario <= 2500 entao\n      novoSalario <- salario * 1.10\n    senao\n      novoSalario <- salario * 1.05\n    fimse\n  fimse\n  escreva(\"Novo salário: R$ \", novoSalario)\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "senao",
+          "leia",
+          "escreva"
+        ],
+        "desejaveis": [
+          "fimse",
+          "real",
+          "novoSalario",
+          "salario",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-potenciacao-sem-operador",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 4,
+      "titulo": "PotenciacaoSemOperador",
+      "enunciado": "Leia dois inteiros não-negativos: a base X e o expoente Y.\nCalcule X elevado a Y (X^Y) sem utilizar o operador de potenciação (* ou **).\nUse um laço de repetição que multiplica a base Y vezes.\nExiba o resultado ao final.\nTratamento especial: qualquer número elevado a 0 deve resultar em 1.\n\nDica: Inicialize resultado <- 1 e multiplique por X a cada iteração do laço.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "2, 5",
+      "saida_esperada": "32",
+      "gabarito_resumo": "Ler base X e expoente Y; iniciar resultado em 1; usar PARA de 1 até Y para multiplicar resultado por X; exibir resultado.",
+      "gabarito_completo": "algoritmo \"PotenciacaoSemOperador\"\nvar\n  X, Y, i: inteiro\n  resultado: inteiro\ninicio\n  leia(X, Y)\n  resultado <- 1\n  para i de 1 ate Y faca\n    resultado <- resultado * X\n  fimpara\n  escreva(resultado)\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "para",
+          "faca",
+          "fimpara"
+        ],
+        "desejaveis": [
+          "inteiro",
+          "resultado",
+          "ate",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-mdc-subtracoes",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 5,
+      "titulo": "MaiorDivisorComumMDCSubtracoes",
+      "enunciado": "Leia dois números inteiros positivos A e B.\nCalcule o MDC (Máximo Divisor Comum) utilizando o método das subtrações sucessivas:\n- Enquanto A e B forem diferentes, subtraia o menor do maior.\n- Quando se igualarem, esse valor é o MDC.\n\nExiba o MDC ao final.\n\nDica: Use ENQUANTO A <> B FAÇA e dentro compare qual é maior para subtrair.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "24, 18",
+      "saida_esperada": "MDC = 6",
+      "gabarito_resumo": "Ler A e B; enquanto A <> B, subtrair o menor do maior; quando iguais, escrever o valor (MDC).",
+      "gabarito_completo": "algoritmo \"MaiorDivisorComumMDCSubtracoes\"\nvar\n  A, B: inteiro\ninicio\n  leia(A, B)\n  enquanto A <> B faca\n    se A > B entao\n      A <- A - B\n    senao\n      B <- B - A\n    fimse\n  fimenquanto\n  escreva(\"MDC = \", A)\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "enquanto",
+          "faca",
+          "fimenquanto"
+        ],
+        "desejaveis": [
+          "senao",
+          "fimse",
+          "inteiro",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-relatorio-vendas",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 6,
+      "titulo": "RelatorioDeVendasMensais",
+      "enunciado": "Uma empresa possui 6 vendedores. Leia o nome e o valor total vendido por cada um.\nAo final, exiba:\na) O total de vendas da empresa no mês\nb) A média de vendas por vendedor\nc) Quantos vendedores ficaram abaixo da média\nd) O nome do vendedor que mais vendeu\n\nDica: Use um laço PARA para ler os dados. Guarde o maior valor e o nome correspondente.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "Ana 1000, Bruno 2000, Carla 1500, Diogo 800, Eva 3000, Felipe 1200",
+      "saida_esperada": "Total=9500, Média=1583.33, Abaixo da média=2, Mais vendeu=Eva",
+      "gabarito_resumo": "Usar PARA de 1 a 6 para ler nome e valor de cada vendedor; acumular total, guardar maior valor+nome; depois calcular média, contar abaixo da média e exibir resultados.",
+      "gabarito_completo": "algoritmo \"RelatorioDeVendasMensais\"\nvar\n  i, abaixoMedia: inteiro\n  nome, nomeMaior: caractere\n  valor, total, media, maior: real\ninicio\n  total <- 0\n  maior <- 0\n  para i de 1 ate 6 faca\n    leia(nome, valor)\n    total <- total + valor\n    se valor > maior entao\n      maior <- valor\n      nomeMaior <- nome\n    fimse\n  fimpara\n  media <- total / 6\n  abaixoMedia <- 0\n  para i de 1 ate 6 faca\n    leia(valor)\n    se valor < media entao\n      abaixoMedia <- abaixoMedia + 1\n    fimse\n  fimpara\n  escreva(\"Total: \", total)\n  escreva(\"Média: \", media)\n  escreva(\"Abaixo da média: \", abaixoMedia)\n  escreva(\"Mais vendeu: \", nomeMaior)\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "para",
+          "faca",
+          "fimpara"
+        ],
+        "desejaveis": [
+          "senao",
+          "fimse",
+          "real",
+          "inteiro",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-adivinhe-numero-secreto",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 7,
+      "titulo": "AdivinheNumeroSecreto",
+      "enunciado": "O programa define internamente um número secreto (ex: 42).\nO usuário tem até 5 tentativas para adivinhar o número.\nA cada tentativa incorreta, informe se o chute foi \"Muito alto\" ou \"Muito baixo\".\nSe o usuário acertar, exiba \"Parabens! Você acertou em X tentativa(s)!\".\nSe esgotar as tentativas sem acertar, exiba \"Fim de jogo! O número era 42\".\n\nDica: Use REPITA...ATÉ (acertou OU tentativas = 5). Incremente o contador dentro do laço.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "Chutes: 50, 40, 42",
+      "saida_esperada": "Muito alto / Muito baixo / Parabens! Você acertou em 3 tentativa(s)!",
+      "gabarito_resumo": "Definir segredo=42; usar REPITA com contador de tentativas e chute; se acertou OU tentativas=5 encerra; caso contrário informar alto/baixo.",
+      "gabarito_completo": "algoritmo \"AdivinheNumeroSecreto\"\nvar\n  segredo, chute, tentativas: inteiro\n  acertou: logico\ninicio\n  segredo <- 42\n  tentativas <- 0\n  acertou <- falso\n  repita\n    tentativas <- tentativas + 1\n    leia(chute)\n    se chute = segredo entao\n      acertou <- verdadeiro\n    senao\n      se tentativas < 5 entao\n        se chute > segredo entao\n          escreva(\"Muito alto\")\n        senao\n          escreva(\"Muito baixo\")\n        fimse\n      fimse\n    fimse\n  ate (acertou = verdadeiro) ou (tentativas = 5)\n  se acertou = verdadeiro entao\n    escreva(\"Parabens! Você acertou em \", tentativas, \" tentativa(s)!\")\n  senao\n    escreva(\"Fim de jogo! O número era 42\")\n  fimse\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "repita",
+          "ate"
+        ],
+        "desejaveis": [
+          "senao",
+          "fimse",
+          "inteiro",
+          "logico",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-contagem-notas-caixa",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 8,
+      "titulo": "ContagemDeNotasDeUmCaixa",
+      "enunciado": "Um caixa eletrônico possui notas de R$ 2, R$ 5, R$ 10, R$ 20, R$ 50 e R$ 100.\nO operador digita o valor de cada nota inserida e 0 para encerrar.\nAo final, exiba quantas notas de cada valor foram inseridas e o total em caixa.\n\nDica: Use ENQUANTO nota <> 0 FAÇA e CASO SELECIONE para incrementar o contador de cada nota.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "100, 50, 100, 10, 5, 2, 0",
+      "saida_esperada": "Notas de 100: 2, de 50: 1, de 10: 1, de 5: 1, de 2: 1 | Total: R$ 267",
+      "gabarito_resumo": "Inicializar contadores por valor; enquanto nota <> 0, ler nota e usar CASO SELECIONE para incrementar o contador; somar valor*contador ao total.",
+      "gabarito_completo": "algoritmo \"ContagemDeNotasDeUmCaixa\"\nvar\n  nota, c2, c5, c10, c20, c50, c100: inteiro\n  total: real\ninicio\n  c2 <- 0\n  c5 <- 0\n  c10 <- 0\n  c20 <- 0\n  c50 <- 0\n  c100 <- 0\n  total <- 0\n  leia(nota)\n  enquanto nota <> 0 faca\n    escolha nota\n      caso 2\n        c2 <- c2 + 1\n        total <- total + 2\n      caso 5\n        c5 <- c5 + 1\n        total <- total + 5\n      caso 10\n        c10 <- c10 + 1\n        total <- total + 10\n      caso 20\n        c20 <- c20 + 1\n        total <- total + 20\n      caso 50\n        c50 <- c50 + 1\n        total <- total + 50\n      caso 100\n        c100 <- c100 + 1\n        total <- total + 100\n    fimescolha\n    leia(nota)\n  fimenquanto\n  escreva(\"Notas de 2: \", c2)\n  escreva(\"Notas de 5: \", c5)\n  escreva(\"Notas de 10: \", c10)\n  escreva(\"Notas de 20: \", c20)\n  escreva(\"Notas de 50: \", c50)\n  escreva(\"Notas de 100: \", c100)\n  escreva(\"Total em caixa: R$ \", total)\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "enquanto",
+          "faca",
+          "fimenquanto",
+          "caso"
+        ],
+        "desejaveis": [
+          "escolha",
+          "fimescolha",
+          "inteiro",
+          "real",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-numero-perfeito",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 9,
+      "titulo": "VerificadorDeNumeroPerfeito",
+      "enunciado": "Um número perfeito é aquele cuja soma dos seus divisores próprios (excluindo ele mesmo) é igual a ele.\nExemplo: 6 é perfeito porque seus divisores próprios são 1, 2 e 3, e 1+2+3 = 6.\nLeia um número inteiro N maior que 1.\nVerifique todos os números de 1 a N e exiba quais são números perfeitos nesse intervalo.\nExiba também a quantidade total de números perfeitos encontrados.\n\nDica: Use dois laços: o externo de 2 até N, o interno de 1 até num-1 para somar divisores.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "30",
+      "saida_esperada": "6, 28 | Total de perfeitos: 2",
+      "gabarito_resumo": "PARA externo de 2 até N verifica cada num; PARA interno de 1 até num-1 soma os divisores próprios; se soma=num imprime o número e incrementa contador.",
+      "gabarito_completo": "algoritmo \"VerificadorDeNumeroPerfeito\"\nvar\n  N, num, i, soma, total: inteiro\ninicio\n  leia(N)\n  total <- 0\n  para num de 2 ate N faca\n    soma <- 0\n    para i de 1 ate num - 1 faca\n      se num mod i = 0 entao\n        soma <- soma + i\n      fimse\n    fimpara\n    se soma = num entao\n      escreva(num, \" é perfeito\")\n      total <- total + 1\n    fimse\n  fimpara\n  escreva(\"Total de perfeitos: \", total)\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "para",
+          "faca",
+          "fimpara"
+        ],
+        "desejaveis": [
+          "senao",
+          "fimse",
+          "inteiro",
+          "mod",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-conversao-decimal-binario",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 10,
+      "titulo": "ConversaoDecimalParaBinario",
+      "enunciado": "Leia um número inteiro positivo N em base decimal.\nConverta-o para base binária usando o método das divisões sucessivas por 2.\nO número binário é formado pelos restos das divisões lidos de baixo para cima.\nExemplo: 13 em binário é 1101.\nExiba o número binário resultante.\n\nDica: Acumule os restos (MOD 2) e ao final exiba-os na ordem inversa. Use uma string para concatenar.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "13",
+      "saida_esperada": "1101",
+      "gabarito_resumo": "Ler N; enquanto N > 0 concatenar N MOD 2 a uma string e dividir N por 2; ao final, inverter a string e exibir.",
+      "gabarito_completo": "algoritmo \"ConversaoDecimalParaBinario\"\nvar\n  N, resto: inteiro\n  binario, invertido: caractere\ninicio\n  leia(N)\n  binario <- \"\"\n  se N = 0 entao\n    escreva(\"0\")\n  senao\n    enquanto N > 0 faca\n      resto <- N mod 2\n      se resto = 0 entao\n        binario <- binario + \"0\"\n      senao\n        binario <- binario + \"1\"\n      fimse\n      N <- N / 2\n    fimenquanto\n    invertido <- \"\"\n    enquanto compr(binario) > 0 faca\n      invertido <- invertido + copia(binario, compr(binario), 1)\n      binario <- copia(binario, 1, compr(binario) - 1)\n    fimenquanto\n    escreva(invertido)\n  fimse\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "enquanto",
+          "faca",
+          "fimenquanto"
+        ],
+        "desejaveis": [
+          "senao",
+          "fimse",
+          "inteiro",
+          "mod",
+          "caractere",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-alg-analise-estatistica-sequencia",
+      "topico_id": "alg-lacos",
+      "lista_origem": "Lista_2___Exerccios_de_IP.md",
+      "numero": 11,
+      "titulo": "AnaliseEstatisticaDeSequencia",
+      "enunciado": "Leia uma sequência de números reais positivos. O usuário encerra digitando 0 (zero).\nAo final, calcule e exiba:\na) Quantidade de números lidos\nb) Soma total\nc) Média aritmética\nd) Maior e menor valor da sequência\ne) Quantidade de valores acima da média\nObs: se o usuário digitar 0 de imediato, exiba \"Nenhum numero foi informado\".\n\nDica: Guarde maior e menor a partir do primeiro número lido. A contagem acima da média só é possível após calcular a média.",
+      "linguagem": "portugol",
+      "entrada_exemplo": "5, 8, 3, 10, 6, 0",
+      "saida_esperada": "Qtd=5, Soma=32, Média=6.4, Maior=10, Menor=3, Acima da média=1",
+      "gabarito_resumo": "Ler sequência até 0 acumulando soma e quantidade; guardar maior/menor; calcular média; depois (segundo passo) contar acima da média.",
+      "gabarito_completo": "algoritmo \"AnaliseEstatisticaDeSequencia\"\nvar\n  valor, soma, media, maior, menor: real\n  qtd, acima, primeiro: inteiro\ninicio\n  soma <- 0\n  qtd <- 0\n  primeiro <- 1\n  leia(valor)\n  enquanto valor <> 0 faca\n    soma <- soma + valor\n    qtd <- qtd + 1\n    se primeiro = 1 entao\n      maior <- valor\n      menor <- valor\n      primeiro <- 0\n    senao\n      se valor > maior entao\n        maior <- valor\n      fimse\n      se valor < menor entao\n        menor <- valor\n      fimse\n    fimse\n    leia(valor)\n  fimenquanto\n  se qtd = 0 entao\n    escreva(\"Nenhum numero foi informado\")\n  senao\n    media <- soma / qtd\n    escreva(\"Quantidade: \", qtd)\n    escreva(\"Soma: \", soma)\n    escreva(\"Média: \", media)\n    escreva(\"Maior: \", maior)\n    escreva(\"Menor: \", menor)\n    acima <- 0\n    leia(valor)\n    enquanto valor <> 0 faca\n      se valor > media entao\n        acima <- acima + 1\n      fimse\n      leia(valor)\n    fimenquanto\n    escreva(\"Acima da média: \", acima)\n  fimse\nfimalgoritmo",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "se",
+          "entao",
+          "leia",
+          "escreva",
+          "enquanto",
+          "faca",
+          "fimenquanto"
+        ],
+        "desejaveis": [
+          "senao",
+          "fimse",
+          "real",
+          "inteiro",
+          "fimalgoritmo"
+        ],
+        "negativas": [
+          "input",
+          "print",
+          "def ",
+          "elif",
+          "if "
+        ]
+      }
+    },
+    {
+      "id": "ex-py-calculadora-imc",
+      "topico_id": "py-variaveis",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 1,
+      "titulo": "Calculadora de IMC",
+      "enunciado": "Variaveis & Expressoes — Calculadora de IMC\nSolicite ao usuario seu peso (kg) e altura (m). Calcule e exiba o IMC usando a formula:\n   IMC = peso / altura²\nExiba com 2 casas decimais e a classificacao: Abaixo do peso (<18,5), Normal (18,5-24,9), Sobrepeso (25-29,9) ou Obeso (>=30).\n💡 Use float(input(...)) para ler numeros reais e f\"{valor:.2f}\" para formatar.",
+      "linguagem": "python",
+      "entrada_exemplo": "Peso: 70\nAltura: 1.75",
+      "saida_esperada": "IMC: 22.86\nClassificacao: Normal",
+      "gabarito_resumo": "Le peso e altura, calcula IMC = peso/altura**2 e classifica por faixa.",
+      "gabarito_completo": "peso = float(input(\"Peso: \"))\naltura = float(input(\"Altura: \"))\nimc = peso / (altura ** 2)\n\nprint(f\"IMC: {imc:.2f}\")\n\nif imc < 18.5:\n    classificacao = \"Abaixo do peso\"\nelif imc < 25:\n    classificacao = \"Normal\"\nelif imc < 30:\n    classificacao = \"Sobrepeso\"\nelse:\n    classificacao = \"Obeso\"\n\nprint(f\"Classificacao: {classificacao}\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "input",
+          "print",
+          "float"
+        ],
+        "desejaveis": [
+          "if",
+          "elif",
+          "else",
+          "**",
+          ".2f"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-conversor-temperatura",
+      "topico_id": "py-variaveis",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 2,
+      "titulo": "Conversor de Temperatura",
+      "enunciado": "Variaveis & Expressoes — Conversor de Temperatura\nCrie um programa que converta temperaturas entre Celsius, Fahrenheit e Kelvin.\nO usuario informa um valor em Celsius e o programa exibe o equivalente nas outras escalas.\n   F = C × 9/5 + 32     |     K = C + 273.15\n💡 Armazene o valor de entrada em uma variavel e reutilize-a nas duas expressoes.",
+      "linguagem": "python",
+      "entrada_exemplo": "Temperatura (C): 100",
+      "saida_esperada": "Fahrenheit: 212.00 F\nKelvin: 373.15 K",
+      "gabarito_resumo": "Le Celsius, converte para Fahrenheit e Kelvin e imprime ambos.",
+      "gabarito_completo": "celsius = float(input(\"Temperatura (C): \"))\nfahrenheit = celsius * 9 / 5 + 32\nkelvin = celsius + 273.15\n\nprint(f\"Fahrenheit: {fahrenheit:.2f} F\")\nprint(f\"Kelvin: {kelvin:.2f} K\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "input",
+          "print",
+          "float"
+        ],
+        "desejaveis": [
+          "**",
+          ".2f"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-troco-inteligente",
+      "topico_id": "py-variaveis",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 3,
+      "titulo": "Troco Inteligente",
+      "enunciado": "Variaveis & Instrucoes — Troco Inteligente\nUm caixa recebe o valor da compra e o valor pago. Calcule o troco e exiba a quantidade minima de notas e moedas necessarias usando as denominacoes: R$100, R$50, R$20, R$10, R$5, R$2, R$1, R$0,50, R$0,25, R$0,10, R$0,05, R$0,01.\n💡 Use // (divisao inteira) e % (resto), iterando pelas denominacoes em ordem decrescente.",
+      "linguagem": "python",
+      "entrada_exemplo": "Compra: 37.40\nPago: 50.00",
+      "saida_esperada": "Troco: R$ 12.60\n1x R$10 | 1x R$2\n1x R$0.50 | 1x R$0.10",
+      "gabarito_resumo": "Calcula troco e distribui em notas/moedas usando divisao inteira.",
+      "gabarito_completo": "compra = float(input(\"Compra: \"))\npago = float(input(\"Pago: \"))\ntroco = round(pago - compra, 2)\nprint(f\"Troco: R$ {troco:.2f}\")\n\ndenominacoes = [100, 50, 20, 10, 5, 2, 1, 0.50, 0.25, 0.10, 0.05, 0.01]\nresto = troco\nfor valor in denominacoes:\n    qtd = int(resto // valor)\n    if qtd > 0:\n        print(f\"{qtd}x R${valor:.2f}\")\n        resto = round(resto - qtd * valor, 2)",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "input",
+          "print",
+          "float"
+        ],
+        "desejaveis": [
+          "for",
+          "//",
+          "%"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-calculadora-modular",
+      "topico_id": "py-funcoes",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 4,
+      "titulo": "Calculadora Modular",
+      "enunciado": "Funcoes — Calculadora Modular\nCrie um modulo com as funcoes: somar(a,b), subtrair(a,b), multiplicar(a,b), dividir(a,b) e potencia(base, exp).\nTrate divisao por zero com uma mensagem de erro adequada.\nImplemente um menu interativo que chame as funcoes conforme a escolha do usuario.\n💡 Use um dicionario para mapear opcoes a funcoes — evita longos if/elif e e mais Pythonico.",
+      "linguagem": "python",
+      "entrada_exemplo": "Escolha: 4\nNum 1: 10\nNum 2: 0",
+      "saida_esperada": "Erro: Divisao por zero nao permitida!",
+      "gabarito_resumo": "Define funcoes basicas e menu via dicionario, tratando divisao por zero.",
+      "gabarito_completo": "def somar(a, b):\n    return a + b\n\ndef subtrair(a, b):\n    return a - b\n\ndef multiplicar(a, b):\n    return a * b\n\ndef dividir(a, b):\n    if b == 0:\n        return \"Erro: Divisao por zero nao permitida!\"\n    return a / b\n\ndef potencia(base, exp):\n    return base ** exp\n\noperacoes = {\n    \"1\": (\"Somar\", somar),\n    \"2\": (\"Subtrair\", subtrair),\n    \"3\": (\"Multiplicar\", multiplicar),\n    \"4\": (\"Dividir\", dividir),\n    \"5\": (\"Potencia\", potencia),\n}\n\nescolha = input(\"Escolha: \")\nn1 = float(input(\"Num 1: \"))\nn2 = float(input(\"Num 2: \"))\n\nif escolha in operacoes:\n    nome, func = operacoes[escolha]\n    resultado = func(n1, n2)\n    print(resultado)\nelse:\n    print(\"Opcao invalida\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "input",
+          "print"
+        ],
+        "desejaveis": [
+          "if",
+          "else",
+          "**",
+          "float"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-validador-senha",
+      "topico_id": "py-funcoes",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 5,
+      "titulo": "Validador de Senha",
+      "enunciado": "Funcoes — Validador de Senha\nImplemente validar_senha(senha) que retorna True se a senha atender TODOS os criterios:\n  • Minimo de 8 caracteres\n  • Pelo menos uma letra maiuscula e uma minuscula\n  • Pelo menos um digito\n  • Pelo menos um caractere especial: !@#$%^&*\nExiba qual(is) criterio(s) nao foram atendidos.\n💡 Use any(c.isupper() for c in senha) — idiomatico e eficiente. Retorne uma tupla (valido, erros).",
+      "linguagem": "python",
+      "entrada_exemplo": "Senha: Python3",
+      "saida_esperada": "Senha invalida:\n- Caractere especial ausente",
+      "gabarito_resumo": "Funcao validar_senha checada criterios com any() e retorna lista de erros.",
+      "gabarito_completo": "def validar_senha(senha):\n    erros = []\n    if len(senha) < 8:\n        erros.append(\"Minimo de 8 caracteres\")\n    if not any(c.isupper() for c in senha):\n        erros.append(\"Letra maiuscula ausente\")\n    if not any(c.islower() for c in senha):\n        erros.append(\"Letra minuscula ausente\")\n    if not any(c.isdigit() for c in senha):\n        erros.append(\"Digito ausente\")\n    especiais = \"!@#$%^&*\"\n    if not any(c in especiais for c in senha):\n        erros.append(\"Caractere especial ausente\")\n    return (len(erros) == 0, erros)\n\nsenha = input(\"Senha: \")\nvalido, erros = validar_senha(senha)\nif valido:\n    print(\"Senha valida!\")\nelse:\n    print(\"Senha invalida:\")\n    for erro in erros:\n        print(f\"- {erro}\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "input",
+          "print",
+          "any"
+        ],
+        "desejaveis": [
+          "for",
+          "if",
+          "else",
+          "len"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-funcoes-geometria",
+      "topico_id": "py-funcoes",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 6,
+      "titulo": "Funcoes de Geometria",
+      "enunciado": "Funcoes — Funcoes de Geometria\nCrie funcoes que calculem area e perimetro de figuras geometricas:\n  • circulo(r)  →  area e perimetro\n  • retangulo(l, a)  →  area e perimetro\n  • triangulo(b, h, l1, l2, l3)  →  area e perimetro\nCada funcao deve retornar uma TUPLA (area, perimetro). Use math.pi.\n💡 math.pi fornece pi com alta precisao. Tuplas sao ideais para multiplos resultados relacionados.",
+      "linguagem": "python",
+      "entrada_exemplo": "circulo(5)",
+      "saida_esperada": "Area: 78.54\nPerimetro: 31.42",
+      "gabarito_resumo": "Funcoes que retornam tupla (area, perimetro) para circulo, retangulo e triangulo.",
+      "gabarito_completo": "import math\n\ndef circulo(r):\n    area = math.pi * r ** 2\n    perimetro = 2 * math.pi * r\n    return (area, perimetro)\n\ndef retangulo(l, a):\n    area = l * a\n    perimetro = 2 * (l + a)\n    return (area, perimetro)\n\ndef triangulo(b, h, l1, l2, l3):\n    area = (b * h) / 2\n    perimetro = l1 + l2 + l3\n    return (area, perimetro)\n\nr = float(input(\"Raio: \"))\narea, perimetro = circulo(r)\nprint(f\"Area: {area:.2f}\")\nprint(f\"Perimetro: {perimetro:.2f}\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "import",
+          "math",
+          "return"
+        ],
+        "desejaveis": [
+          "**",
+          ".2f",
+          "float",
+          "input",
+          "print"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-classificador-triangulos",
+      "topico_id": "py-condicionais",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 7,
+      "titulo": "Classificador de Triangulos",
+      "enunciado": "Condicionais — Classificador de Triangulos\nDados tres lados, escreva um programa que:\n  • Verifique se os lados formam um triangulo valido\n  • Classifique quanto aos lados: Equilatero, Isosceles ou Escaleno\n  • Classifique quanto aos angulos: Acutangulo, Retangulo ou Obtusangulo\nUse a Lei dos Cossenos para classificar os angulos.\n💡 Condicao valida: a+b>c (para todos os pares). Para angulos, compare o quadrado do maior lado.",
+      "linguagem": "python",
+      "entrada_exemplo": "Lado a: 3\nLado b: 4\nLado c: 5",
+      "saida_esperada": "Valido: Sim\nEscaleno | Retangulo",
+      "gabarito_resumo": "Valida triangulo, classifica por lados e por angulos via Lei dos Cossenos.",
+      "gabarito_completo": "a = float(input(\"Lado a: \"))\nb = float(input(\"Lado b: \"))\nc = float(input(\"Lado c: \"))\n\nvalido = (a + b > c) and (a + c > b) and (b + c > a)\nprint(f\"Valido: {'Sim' if valido else 'Nao'}\")\n\nif valido:\n    if a == b == c:\n        tipo_lado = \"Equilatero\"\n    elif a == b or a == c or b == c:\n        tipo_lado = \"Isosceles\"\n    else:\n        tipo_lado = \"Escaleno\"\n\n    lados = sorted([a, b, c])\n    x, y, z = lados\n    if x ** 2 + y ** 2 == z ** 2:\n        tipo_angulo = \"Retangulo\"\n    elif x ** 2 + y ** 2 > z ** 2:\n        tipo_angulo = \"Acutangulo\"\n    else:\n        tipo_angulo = \"Obtusangulo\"\n\n    print(f\"{tipo_lado} | {tipo_angulo}\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "input",
+          "print",
+          "if",
+          "elif",
+          "else"
+        ],
+        "desejaveis": [
+          "**",
+          "float",
+          "and",
+          "=="
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-fibonacci-recursivo",
+      "topico_id": "py-recursao",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 8,
+      "titulo": "Fibonacci Recursivo",
+      "enunciado": "Recursividade — Fibonacci Recursivo\nImplemente fibonacci(n) de duas formas:\n  1. Recursao simples  →  O(2ⁿ)\n  2. Com memorizacao (@functools.lru_cache)  →  O(n)\nCompare o tempo de execucao das duas versoes para n = 35.\nSequencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 ...\n💡 Caso base: n <= 1. O decorador @lru_cache armazena resultados ja calculados automaticamente.",
+      "linguagem": "python",
+      "entrada_exemplo": "fibonacci(10)",
+      "saida_esperada": "55\nSimples: 0.0023s\nCache:   0.0001s",
+      "gabarito_resumo": "Fibonacci recursivo simples e com @lru_cache, medindo tempo de cada.",
+      "gabarito_completo": "import time\nimport functools\n\ndef fibonacci_simples(n):\n    if n <= 1:\n        return n\n    return fibonacci_simples(n - 1) + fibonacci_simples(n - 2)\n\n@functools.lru_cache(maxsize=None)\ndef fibonacci_cache(n):\n    if n <= 1:\n        return n\n    return fibonacci_cache(n - 1) + fibonacci_cache(n - 2)\n\nn = int(input(\"n: \"))\nprint(fibonacci_cache(n))\n\ninicio = time.time()\nfibonacci_simples(n)\nfim = time.time()\nprint(f\"Simples: {fim - inicio:.4f}s\")\n\ninicio = time.time()\nfibonacci_cache(n)\nfim = time.time()\nprint(f\"Cache:   {fim - inicio:.4f}s\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "if",
+          "return"
+        ],
+        "desejaveis": [
+          "@functools.lru_cache",
+          "import",
+          "print",
+          "input"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-torre-hanoi",
+      "topico_id": "py-recursao",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 9,
+      "titulo": "Torre de Hanoi",
+      "enunciado": "Recursividade — Torre de Hanoi\nImplemente o classico problema da Torre de Hanoi de forma recursiva.\nA funcao hanoi(n, origem, destino, auxiliar) deve exibir o passo a passo para mover n discos da torre origem para a torre destino usando a torre auxiliar.\nExiba tambem o numero total de movimentos realizados.\n💡 Pense no caso base (n=1) e no recursivo: mova n-1 para auxiliar, mova o maior, depois mova n-1.",
+      "linguagem": "python",
+      "entrada_exemplo": "hanoi(3, A, C, B)",
+      "saida_esperada": "A->C | A->B | C->B\nA->C | B->A | B->C\nA->C | Movs: 7",
+      "gabarito_resumo": "Torre de Hanoi recursiva contando movimentos via contador em lista.",
+      "gabarito_completo": "passos = []\n\ndef hanoi(n, origem, destino, auxiliar):\n    if n == 1:\n        passos.append(f\"{origem}->{destino}\")\n        return\n    hanoi(n - 1, origem, auxiliar, destino)\n    passos.append(f\"{origem}->{destino}\")\n    hanoi(n - 1, auxiliar, destino, origem)\n\nn = int(input(\"n: \"))\nhanoi(n, \"A\", \"C\", \"B\")\n\nfor i, p in enumerate(passos):\n    sep = \" | \" if i < len(passos) - 1 else f\" | Movs: {len(passos)}\"\n    print(p, end=sep)\nprint()",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "if",
+          "return"
+        ],
+        "desejaveis": [
+          "for",
+          "print",
+          "input",
+          "len"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-calculadora-estatisticas",
+      "topico_id": "py-funcoes",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 10,
+      "titulo": "Calculadora de Estatisticas",
+      "enunciado": "Funcoes com Resultado — Calculadora de Estatisticas\nCrie funcoes que recebem uma lista de numeros e retornam:\n  • media(lista)         → media aritmetica\n  • mediana(lista)       → valor central apos ordenacao\n  • moda(lista)          → valor mais frequente\n  • desvio_padrao(lista) → desvio padrao populacional\n  • resumo(lista)        → dicionario com todas as metricas\nSem usar o modulo statistics.\n💡 Counter retorna um dicionario de frequencias. Mediana par = media dos dois elementos centrais.",
+      "linguagem": "python",
+      "entrada_exemplo": "[4,7,13,2,7,9,4,7]",
+      "saida_esperada": "media:   6.75\nmediana: 7.0\nmoda:    [7]\ndesvpad: 2.99",
+      "gabarito_resumo": "Funcoes de estatistica sem statistics: media, mediana, moda, desvio padrao e resumo.",
+      "gabarito_completo": "def media(lista):\n    return sum(lista) / len(lista)\n\ndef mediana(lista):\n    ordenada = sorted(lista)\n    n = len(ordenada)\n    if n % 2 == 1:\n        return ordenada[n // 2]\n    return (ordenada[n // 2 - 1] + ordenada[n // 2]) / 2\n\ndef moda(lista):\n    contagem = {}\n    for valor in lista:\n        contagem[valor] = contagem.get(valor, 0) + 1\n    max_freq = max(contagem.values())\n    return [v for v, f in contagem.items() if f == max_freq]\n\ndef desvio_padrao(lista):\n    m = media(lista)\n    soma = sum((x - m) ** 2 for x in lista)\n    return (soma / len(lista)) ** 0.5\n\ndef resumo(lista):\n    return {\n        \"media\": media(lista),\n        \"mediana\": mediana(lista),\n        \"moda\": moda(lista),\n        \"desvio_padrao\": desvio_padrao(lista),\n    }\n\nentrada = input(\"Lista: \")\nlista = [float(x) for x in entrada.strip(\"[]\").split(\",\")]\nr = resumo(lista)\nprint(f\"media:   {r['media']:.2f}\")\nprint(f\"mediana: {r['mediana']}\")\nprint(f\"moda:    {r['moda']}\")\nprint(f\"desvpad: {r['desvio_padrao']:.2f}\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "return",
+          "print"
+        ],
+        "desejaveis": [
+          "for",
+          "if",
+          "else",
+          ".2f",
+          "**",
+          "len"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo",
+          "import statistics"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-verificador-primos",
+      "topico_id": "py-funcoes",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 11,
+      "titulo": "Verificador de Primos",
+      "enunciado": "Funcoes com Resultado — Verificador de Primos\nImplemente as funcoes:\n  • eh_primo(n)           → True se n e primo\n  • primos_ate(n)         → lista de primos ate n (Crivo de Eratostenes)\n  • fatoracao_prima(n)    → lista dos fatores primos de n\n  • mmc(a, b) e mdc(a, b) usando o Algoritmo de Euclides\n💡 Para eh_primo, verifique divisores ate sqrt(n). O Crivo usa uma lista booleana marcando compostos.",
+      "linguagem": "python",
+      "entrada_exemplo": "fatoracao_prima(360)",
+      "saida_esperada": "[2, 2, 2, 3, 3, 5]\n= 2³ × 3² × 5",
+      "gabarito_resumo": "Crivo de Eratostenes, fatoracao, mdc/mmc via Algoritmo de Euclides.",
+      "gabarito_completo": "import math\n\ndef eh_primo(n):\n    if n < 2:\n        return False\n    for i in range(2, int(math.sqrt(n)) + 1):\n        if n % i == 0:\n            return False\n    return True\n\ndef primos_ate(n):\n    crivo = [True] * (n + 1)\n    crivo[0] = crivo[1] = False\n    for i in range(2, int(math.sqrt(n)) + 1):\n        if crivo[i]:\n            for j in range(i * i, n + 1, i):\n                crivo[j] = False\n    return [i for i, e in enumerate(crivo) if e]\n\ndef fatoracao_prima(n):\n    fatores = []\n    divisor = 2\n    while n > 1:\n        while n % divisor == 0:\n            fatores.append(divisor)\n            n //= divisor\n        divisor += 1\n    return fatores\n\ndef mdc(a, b):\n    while b:\n        a, b = b, a % b\n    return a\n\ndef mmc(a, b):\n    return a * b // mdc(a, b)\n\nn = int(input(\"n: \"))\nfatores = fatoracao_prima(n)\nprint(fatores)\n\ncontagem = {}\nfor f in fatores:\n    contagem[f] = contagem.get(f, 0) + 1\n\npartes = [f\"{p}^{e}\" if e > 1 else str(p) for p, e in contagem.items()]\nprint(\"= \" + \" × \".join(partes))",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "return",
+          "for"
+        ],
+        "desejaveis": [
+          "while",
+          "if",
+          "else",
+          "%",
+          "**",
+          "import"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-calculadora-progressoes",
+      "topico_id": "py-funcoes",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 12,
+      "titulo": "Calculadora de Progressoes",
+      "enunciado": "Funcoes com Resultado — Calculadora de Progressoes\nCrie funcoes para trabalhar com progressoes:\n  • pa_termo(a1,r,n) e pa_soma(a1,r,n)  →  Progressao Aritmetica\n  • pg_termo(a1,q,n) e pg_soma(a1,q,n)  →  Progressao Geometrica\n  • identificar_sequencia(lista)  →  detecta se e PA, PG ou nenhuma\n💡 PA: diferenca constante. PG: razao constante. Use all() para verificar a condicao em toda a lista.",
+      "linguagem": "python",
+      "entrada_exemplo": "identificar([2,4,8,16])",
+      "saida_esperada": "PG com razao q=2.0\npg_soma(1,2,10)=1023",
+      "gabarito_resumo": "Funcoes para PA/PG termo e soma, e identificar tipo de sequencia.",
+      "gabarito_completo": "def pa_termo(a1, r, n):\n    return a1 + (n - 1) * r\n\ndef pa_soma(a1, r, n):\n    return n * (a1 + pa_termo(a1, r, n)) // 2\n\ndef pg_termo(a1, q, n):\n    return a1 * q ** (n - 1)\n\ndef pg_soma(a1, q, n):\n    if q == 1:\n        return a1 * n\n    return a1 * (q ** n - 1) // (q - 1)\n\ndef identificar_sequencia(lista):\n    if len(lista) < 2:\n        return \"Sequencia muito curta\"\n    d = lista[1] - lista[0]\n    eh_pa = all(lista[i] - lista[i - 1] == d for i in range(1, len(lista)))\n    if lista[0] != 0 and all(lista[i - 1] != 0 for i in range(1, len(lista))):\n        q = lista[1] / lista[0]\n        eh_pg = all(abs(lista[i] / lista[i - 1] - q) < 1e-9 for i in range(1, len(lista)))\n    else:\n        eh_pg = False\n    if eh_pa:\n        return f\"PA com razao r={d}\"\n    if eh_pg:\n        return f\"PG com razao q={q}\"\n    return \"Nenhuma\"\n\nentrada = input(\"Lista: \")\nlista = [float(x) for x in entrada.strip(\"[]\").split(\",\")]\nprint(identificar_sequencia(lista))\nprint(f\"pg_soma(1,2,10)={pg_soma(1, 2, 10)}\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "return",
+          "print"
+        ],
+        "desejaveis": [
+          "for",
+          "if",
+          "else",
+          "**",
+          "all",
+          "abs"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-analisador-texto",
+      "topico_id": "py-lacos-for",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 13,
+      "titulo": "Analisador de Texto",
+      "enunciado": "Strings — Analisador de Texto\nDado um texto, crie funcoes que retornem:\n  • Numero de palavras, frases e paragrafos\n  • Frequencia de cada letra (ignorando maiusculas/minusculas)\n  • As 5 palavras mais frequentes\n  • Se o texto e um palindromo (ignorando espacos e pontuacao)\n  • Versao do texto em Pig Latin\n💡 Use re.sub() para remover pontuacao. A notacao [::-1] inverte uma string (util para palindromos).",
+      "linguagem": "python",
+      "entrada_exemplo": "'Arara voa alto'",
+      "saida_esperada": "palavras: 3\npalindromo: False\npig latin: Araraay",
+      "gabarito_resumo": "Funcoes para contar palavras, palindromo (com reversao) e Pig Latin.",
+      "gabarito_completo": "import re\n\ndef contar_palavras(texto):\n    return len(texto.split())\n\ndef eh_palindromo(texto):\n    limpo = re.sub(r\"[^a-zA-Z]\", \"\", texto).lower()\n    return limpo == limpo[::-1]\n\ndef pig_latin(texto):\n    palavras = texto.split()\n    resultado = []\n    for p in palavras:\n        if p and p[0].lower() in \"aeiou\":\n            resultado.append(p + \"ay\")\n        else:\n            resultado.append(p[1:] + p[0] + \"ay\" if p else p)\n    return \" \".join(resultado)\n\ntexto = input(\"Texto: \").strip(\"'\\\"\")\nprint(f\"palavras: {contar_palavras(texto)}\")\nprint(f\"palindromo: {eh_palindromo(texto)}\")\nprint(f\"pig latin: {pig_latin(texto)}\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "return",
+          "print"
+        ],
+        "desejaveis": [
+          "for",
+          "if",
+          "else",
+          "import",
+          "split"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-padroes-iteracao",
+      "topico_id": "py-listas-tuplas",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 14,
+      "titulo": "Padroes com Iteracao",
+      "enunciado": "Iteracao — Padroes com Iteracao\nUse lacos for e while para gerar:\n  • Triangulo de Pascal — primeiras n linhas\n  • Espiral numerica — preencher uma matriz n×n em espiral\n  • Tabuada formatada — tabela de multiplicacao de 1 a n×n\nPara o triangulo de Pascal, use listas aninhadas para armazenar cada linha.\n💡 No triangulo, cada elemento = linha_anterior[j-1] + linha_anterior[j]. Inicie e termine com 1.",
+      "linguagem": "python",
+      "entrada_exemplo": "pascal(5)",
+      "saida_esperada": "      1\n     1 1\n    1 2 1\n   1 3 3 1\n  1 4 6 4 1",
+      "gabarito_resumo": "Triangulo de Pascal com listas aninhadas + espiral numerica em matriz n×n.",
+      "gabarito_completo": "def pascal(n):\n    triangulo = []\n    for i in range(n):\n        linha = [1] * (i + 1)\n        for j in range(1, i):\n            linha[j] = triangulo[i - 1][j - 1] + triangulo[i - 1][j]\n        triangulo.append(linha)\n    return triangulo\n\ndef espiral(n):\n    matriz = [[0] * n for _ in range(n)]\n    valor = 1\n    topo, baixo, esq, dir = 0, n - 1, 0, n - 1\n    while topo <= baixo and esq <= dir:\n        for c in range(esq, dir + 1):\n            matriz[topo][c] = valor\n            valor += 1\n        topo += 1\n        for r in range(topo, baixo + 1):\n            matriz[r][dir] = valor\n            valor += 1\n        dir -= 1\n        for c in range(dir, esq - 1, -1):\n            matriz[baixo][c] = valor\n            valor += 1\n        baixo -= 1\n        for r in range(baixo, topo - 1, -1):\n            matriz[r][esq] = valor\n            valor += 1\n        esq += 1\n    return matriz\n\nn = int(input(\"n: \"))\nt = pascal(n)\nlargura = len(\" \".join(map(str, t[-1])))\nfor linha in t:\n    print(\" \".join(map(str, linha)).center(largura))",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "for",
+          "return"
+        ],
+        "desejaveis": [
+          "while",
+          "if",
+          "else",
+          "range",
+          "len"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    },
+    {
+      "id": "ex-py-cifra-cesar",
+      "topico_id": "py-lacos-for",
+      "lista_origem": "Lista5_exercicios_python_ia.md",
+      "numero": 15,
+      "titulo": "Cifra de Cesar Generalizada",
+      "enunciado": "Strings & Iteracao — Cifra de Cesar Generalizada\nImplemente um sistema de criptografia baseado na Cifra de Cesar:\n  • cifrar(texto, chave)    → desloca cada letra chave posicoes no alfabeto\n  • decifrar(texto, chave)  → reverte a cifra\n  • quebrar_cifra(texto)    → testa as 26 possibilidades por analise de frequencia\nPreserve maiusculas/minusculas e ignore nao-alfabeticos.\n💡 Use ord() e chr() para manipular codigos ASCII. O operador % 26 faz o wrap-around do alfabeto.",
+      "linguagem": "python",
+      "entrada_exemplo": "cifrar('Python', 3)",
+      "saida_esperada": "'Sbwkrq'",
+      "gabarito_resumo": "Cifra de Cesar com cifrar/decifrar usando ord/chr e wrap-around % 26.",
+      "gabarito_completo": "def cifrar(texto, chave):\n    resultado = \"\"\n    for c in texto:\n        if c.isupper():\n            resultado += chr((ord(c) - ord(\"A\") + chave) % 26 + ord(\"A\"))\n        elif c.islower():\n            resultado += chr((ord(c) - ord(\"a\") + chave) % 26 + ord(\"a\"))\n        else:\n            resultado += c\n    return resultado\n\ndef decifrar(texto, chave):\n    return cifrar(texto, -chave)\n\ndef quebrar_cifra(texto):\n    possibilidades = []\n    for chave in range(26):\n        possibilidades.append((chave, cifrar(texto, -chave)))\n    return possibilidades\n\ntexto = input(\"Texto: \").strip(\"'\\\"\")\nchave = int(input(\"Chave: \"))\nprint(f\"'{cifrar(texto, chave)}'\")",
+      "criterios_keywords": {
+        "obrigatorias": [
+          "def",
+          "for",
+          "return"
+        ],
+        "desejaveis": [
+          "if",
+          "elif",
+          "else",
+          "ord",
+          "chr",
+          "%",
+          "print"
+        ],
+        "negativas": [
+          "leia",
+          "escreva",
+          "algoritmo"
+        ]
+      }
+    }
+  ]
+}

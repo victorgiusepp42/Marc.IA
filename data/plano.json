@@ -1,0 +1,151 @@
+{
+  "disciplina": "Introdução à Programação",
+  "categorias_ordem": ["algoritmos", "python"],
+  "topicos": [
+    {
+      "id": "alg-variaveis",
+      "titulo": "Variáveis e Tipos",
+      "descricao": "Conceito de variável, tipos primitivos (inteiro, real, caractere, logico), atribuição.",
+      "categoria": "algoritmos",
+      "linguagens_aceitas": ["visualg", "portugol"],
+      "ordem": 1
+    },
+    {
+      "id": "alg-entrada-saida",
+      "titulo": "Entrada e Saída",
+      "descricao": "Comandos leia e escreva, formatação de saída.",
+      "categoria": "algoritmos",
+      "linguagens_aceitas": ["visualg", "portugol"],
+      "ordem": 2
+    },
+    {
+      "id": "alg-condicionais",
+      "titulo": "Condicionais",
+      "descricao": "Estruturas se/entao/senao/fimse, escolha/caso.",
+      "categoria": "algoritmos",
+      "linguagens_aceitas": ["visualg", "portugol"],
+      "ordem": 3
+    },
+    {
+      "id": "alg-lacos",
+      "titulo": "Laços de Repetição",
+      "descricao": "Estruturas para/faca/fimpara, enquanto/faca/fimenquanto, repita/ate.",
+      "categoria": "algoritmos",
+      "linguagens_aceitas": ["visualg", "portugol"],
+      "ordem": 4
+    },
+    {
+      "id": "alg-vetores",
+      "titulo": "Vetores e Matrizes",
+      "descricao": "Vetores (vetor[1..N]), matrizes (matriz[1..N, 1..M]).",
+      "categoria": "algoritmos",
+      "linguagens_aceitas": ["visualg", "portugol"],
+      "ordem": 5
+    },
+    {
+      "id": "alg-funcoes",
+      "titulo": "Funções e Procedimentos",
+      "descricao": "Definição de funções e procedimentos em Portugol, parâmetros e retorno.",
+      "categoria": "algoritmos",
+      "linguagens_aceitas": ["visualg", "portugol"],
+      "ordem": 6
+    },
+    {
+      "id": "alg-recursao",
+      "titulo": "Recursão",
+      "descricao": "Funções recursivas, caso base, caso recursivo.",
+      "categoria": "algoritmos",
+      "linguagens_aceitas": ["portugol"],
+      "linguagem_obrigatoria": "portugol",
+      "ordem": 7
+    },
+    {
+      "id": "py-variaveis",
+      "titulo": "Variáveis e Tipos",
+      "descricao": "Variáveis em Python, tipos dinâmicos, atribuição, fatiamento.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 8
+    },
+    {
+      "id": "py-entrada-saida",
+      "titulo": "Entrada e Saída",
+      "descricao": "Funções input() e print(), formatação com f-strings.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 9
+    },
+    {
+      "id": "py-operadores",
+      "titulo": "Operadores",
+      "descricao": "Operadores aritméticos, relacionais, lógicos e de atribuição. Precedência.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 10
+    },
+    {
+      "id": "py-condicionais",
+      "titulo": "Condicionais",
+      "descricao": "Estruturas if, elif, else. Condições compostas.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 11
+    },
+    {
+      "id": "py-lacos-while",
+      "titulo": "Laços (while)",
+      "descricao": "Repetição com while, contadores, acumuladores, break e continue.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 12
+    },
+    {
+      "id": "py-lacos-for",
+      "titulo": "Laços (for)",
+      "descricao": "Repetição com for, range(), iteração sobre sequências, enumerate().",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 13
+    },
+    {
+      "id": "py-funcoes",
+      "titulo": "Funções",
+      "descricao": "Definição com def, parâmetros, retorno, escopo de variáveis, funções built-in.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 14
+    },
+    {
+      "id": "py-listas-tuplas",
+      "titulo": "Listas e Tuplas",
+      "descricao": "Criação, indexação, fatiamento, métodos de lista, imutabilidade de tuplas.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 15
+    },
+    {
+      "id": "py-dicionarios",
+      "titulo": "Dicionários",
+      "descricao": "Pares chave-valor, métodos keys/values/items, iteração.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 16
+    },
+    {
+      "id": "py-arquivos",
+      "titulo": "Arquivos",
+      "descricao": "Abertura, leitura e escrita. Modos r/w/a, context manager with, encoding.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 17
+    },
+    {
+      "id": "py-recursao",
+      "titulo": "Recursão",
+      "descricao": "Funções recursivas, caso base, memoização.",
+      "categoria": "python",
+      "linguagens_aceitas": ["python"],
+      "ordem": 18
+    }
+  ]
+}
