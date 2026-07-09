@@ -1,0 +1,36 @@
+# --- Ambiente Python ---
+venv/
+.venv/
+.env
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# --- Estado runtime do app ---
+instance/
+*.db
+data/sessoes/
+data/chroma/
+logs_servidor.txt
+logs_servidor_err.txt
+data/benchmark_run.log
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+
+# --- Claude Code local ---
+.claude/
+
+# --- Credenciais (Google Sheets pausado em 01/07/2026; ver TASK-PAUSADAS) ---
+credentials/
+*.json.key
+
+# Google Sheets API (pausado em 01/07/2026 — ver TASK-PAUSADAS)
+# Quando reativar, gerar credenciais e voltar a pasta credentials/
+
+# --- Memorial pessoal de contribuições (NÃO sobe pro git) ---
+# Controle pessoal de Victor — separa o que foi feito por IA vs humano.
+# Documenta aprendizado e processo, não é parte do produto.
+docs/MEMORIAL_IA/

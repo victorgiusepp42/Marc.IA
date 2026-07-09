@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marc.IA — Tutor de Programação</title>
+    <meta name="theme-color" content="#0F1419" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme-hightech.css') }}">
+</head>
+<body>
+
+    <!-- Scan-lines CRT (efeito visual sutil) -->
+
+    <!-- DEV: voltar pra splash (só visível em modo dev) -->
+    {% if dev_mode %}
+    <a href="/" class="dev-toggle" title="DEV: voltar pra splash" aria-label="DEV: voltar pra splash">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
+    {% endif %}
+
+    <!-- Toggle de tema -->
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Mudar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+
+    <!-- Canvas de partículas espaciais (só tema dark) -->
+
+    <!-- Onboarding "Boot Sequence" (aparece 1x por aluno) -->
+    <div id="boot-overlay" class="boot-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="boot-titulo">
+        <div class="boot-frame">
+            <div class="boot-screen">
+                <section class="boot-slide active" data-slide="0">
+                    <p class="boot-eyebrow"><span class="dot-live"></span> MARC.IA · ONLINE</p>
+                    <h2 id="boot-titulo" class="boot-titulo">Boa noite, jogador.</h2>
+                    <p class="boot-copy">Você é o aluno. Eu sou o <strong>PyAI Professor</strong>.<br>Vamos aprender programação juntos — um desafio por vez.</p>
+                </section>
+                <section class="boot-slide" data-slide="1">
+                    <p class="boot-eyebrow">PASSO 01</p>
+                    <h2 class="boot-titulo">Use o Colab pra codar.</h2>
+                    <p class="boot-copy">Para rodar seus códigos, abra o <strong>Google Colab</strong> no botão <span class="kbd">📓 ABRIR COLAB</span>.<br>É grátis e já vem com Python instalado.</p>
+                </section>
+                <section class="boot-slide" data-slide="2">
+                    <p class="boot-eyebrow">PASSO 02</p>
+                    <h2 class="boot-titulo">Cole aqui pra análise.</h2>
+                    <p class="boot-copy">Quando travar ou der erro, cole seu código no chat (modo <span class="kbd">CÓDIGO</span>) e me peça pra analisar.<br>Eu faço o <em>code tracing</em> com você.</p>
+                </section>
+
+                <div class="boot-nav">
+                    <div class="boot-dots">
+                        <span class="dot active" data-dot="0"></span>
+                        <span class="dot" data-dot="1"></span>
+                        <span class="dot" data-dot="2"></span>
+                    </div>
+                    <button id="boot-prev" class="boot-btn ghost" type="button">‹ Voltar</button>
+                    <button id="boot-next" class="boot-btn" type="button">Próximo ›</button>
+                    <button id="boot-start" class="boot-btn primary hidden" type="button">Começar</button>
+                    <button id="boot-skip" class="boot-skip" type="button">pular tutorial</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="app-header">
+        <!-- Botão hambúrguer — visível só no mobile (max-width: 768px via CSS).
+             Abre/fecha a sidebar como drawer sobre o chat. -->
+        <button id="sidebarToggle" class="sidebar-toggle" type="button" aria-label="Abrir menu de tópicos" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+
+        <div class="brand">
+            <img class="brand-mark" src="{{ url_for('static', filename='img/marc_ia_logo.png') }}" alt="Marc.IA">
+            <div class="brand-text">
+                <h1 class="brand-name">Marc.IA</h1>
+                <span class="brand-sub">Tutor de Programação · UFCAT</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overlay escuro — toque fora do drawer fecha a sidebar no mobile -->
+    <div id="sidebarOverlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <!-- "Rota" removido — agora "TRILHA" (eyebrow) é o único título da seção, com fonte maior -->
+                <p class="section-eyebrow">Trilha</p>
+                <ul id="topicos" class="topic-list"></ul>
+            </div>
+            <div class="sidebar-footer">
+                <a id="btn-colab" class="btn-colab" href="https://colab.research.google.com/" target="_blank" rel="noopener noreferrer" title="Abrir Google Colab em nova aba">
+                    <span class="colab-icon">📓</span>
+                    <span class="colab-label">Abrir Colab</span>
+                </a>
+                <a id="btn-visualg" class="btn-colab btn-colab--alt" href="https://visualg3.com.br/" target="_blank" rel="noopener noreferrer" title="Abrir Visualg Studio em nova aba">
+                    <span class="colab-icon">🔷</span>
+                    <span class="colab-label">Abrir Visualg</span>
+                </a>
+                <a id="btn-portugol" class="btn-colab btn-colab--alt" href="https://portugol.dev/" target="_blank" rel="noopener noreferrer" title="Abrir Portugol em nova aba">
+                    <span class="colab-icon">🐢</span>
+                    <span class="colab-label">Abrir Portugol</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <div id="chat-messages" class="chat-stream"></div>
+
+            <form id="chat-form" class="composer" autocomplete="off">
+                <!-- Row superior: mode-toggle (esq) + linguagem-picker (dir) lado a lado.
+                     Picker some quando tópico não aceita múltiplas linguagens
+                     (ver chat.js → atualizarPickerLinguagem). -->
+                <div class="composer-toolbar-row">
+                    <div class="mode-toggle" role="tablist" aria-label="Modo de envio">
+                        <button type="button" class="mode-btn active" data-mode="duvida" role="tab" aria-selected="true">Dúvida</button>
+                        <button type="button" class="mode-btn" data-mode="codigo" role="tab" aria-selected="false">Código</button>
+                    </div>
+
+                    <div id="linguagem-picker" class="mode-toggle linguagem-picker hidden" role="group" aria-label="Linguagem alvo da resposta">
+                        <button type="button" class="mode-btn lang-btn" data-lang="visualg">Visualg</button>
+                        <button type="button" class="mode-btn lang-btn" data-lang="portugol">Portugol</button>
+                    </div>
+                </div>
+
+                <div class="mode-panel active" data-panel="duvida">
+                    <div class="composer-row">
+                        <textarea id="chat-input" class="composer-input composer-textarea" placeholder="Pergunte algo ao Marc.IA..." rows="3" autocomplete="off"></textarea>
+                        <button type="submit" class="composer-send">
+                            <span>Enviar</span>
+                            <span class="send-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mode-panel" data-panel="codigo">
+                    <div class="code-toolbar">
+                        <label for="linguagem" class="code-label">Ling</label>
+                        <select id="linguagem" class="code-select">
+                            <option value="python">Python</option>
+                            <option value="portugol">Portugol</option>
+                        </select>
+                    </div>
+                    <textarea id="chat-codigo" class="composer-code" placeholder="Cole seu código aqui..." spellcheck="false" rows="6"></textarea>
+                    <div class="code-actions">
+                        <input type="text" id="chat-codigo-pergunta" class="composer-input-small" placeholder="O que você quer saber? (opcional)" autocomplete="off">
+                        <button type="submit" class="composer-send">
+                            <span>Analisar código</span>
+                            <span class="send-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+    <script>
+        // === Toggle de tema (light/dark) — mesmo padrão do splash ===
+        (function () {
+            const STORAGE_KEY = 'marcia-theme';
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+
+            function applyTheme(theme) {
+                root.setAttribute('data-theme', theme);
+                toggle.setAttribute('aria-label',
+                    theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro');
+                try { localStorage.setItem(STORAGE_KEY, theme); } catch (_) {}
+            }
+
+            function getInitialTheme() {
+                try {
+                    const saved = localStorage.getItem(STORAGE_KEY);
+                    if (saved === 'light' || saved === 'dark') return saved;
+                } catch (_) {}
+                return window.matchMedia('(prefers-color-scheme: dark)').matches
+                    ? 'dark' : 'light';
+            }
+
+            applyTheme(getInitialTheme());
+
+            toggle.addEventListener('click', function () {
+                const current = root.getAttribute('data-theme') || 'dark';
+                applyTheme(current === 'dark' ? 'light' : 'dark');
+            });
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+                try { if (localStorage.getItem(STORAGE_KEY)) return; } catch (_) {}
+                applyTheme(e.matches ? 'dark' : 'light');
+            });
+        })();
+    </script>
+</body>
+</html>
