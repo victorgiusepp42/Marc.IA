@@ -1,0 +1,330 @@
+/* =========================================================
+   MARC.IA · SPLASH
+   Layout definitivo (split 60/40) com toggle light/dark
+   Imagem do projeto: static/img/marc_ia_logo.png
+
+   Responsivo via CSS variables dinâmicas + clamp() —
+   tudo escala sozinho do mobile (320px) ao 4K.
+   Conteúdo sempre centralizado no viewport.
+   ========================================================= */
+
+[data-theme="dark"] {
+  --bg-page:     #0F1419;
+  --bg-panel:    #161B22;
+  --bg-soft:     #1C2128;
+  --fg:          #E6EDF3;
+  --fg-soft:     #B1BAC4;
+  --fg-muted:    #768390;
+  --rule:        #21262D;
+  --rule-strong: #2D333B;
+  --accent:      #7AB7FF;
+  --accent-hover:#A4CAFF;
+  --accent-on:   #0F1419;
+  --toggle-bg:   rgba(22,27,34,0.85);
+  --dev-bg:      rgba(22,27,34,0.85);
+  --shadow-lg:   0 12px 32px rgba(0,0,0,0.5);
+}
+
+[data-theme="light"] {
+  --bg-page:     #FAFAFA;
+  --bg-panel:    #FFFFFF;
+  --bg-soft:     #F4F4F5;
+  --fg:          #18181B;
+  --fg-soft:     #52525B;
+  --fg-muted:    #A1A1AA;
+  --rule:        #E4E4E7;
+  --rule-strong: #D4D4D8;
+  --accent:      #2563EB;
+  --accent-hover:#1D4ED8;
+  --accent-on:   #FFFFFF;
+  --toggle-bg:   rgba(255,255,255,0.85);
+  --dev-bg:      rgba(255,255,255,0.85);
+  --shadow-lg:   0 12px 32px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background-color: var(--bg-page);
+  color: var(--fg);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* font-size base escala de 14px (mobile) a 16px (desktop) */
+  font-size: clamp(14px, 0.85vw + 0.5rem, 16px);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  height: 100%;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* === VARIÁVEIS DINÂMICAS (escala com viewport) === */
+:root {
+  /* gap entre colunas: 24px (mobile) → 56px (desktop) */
+  --gap-col: clamp(24px, 4vw, 56px);
+  /* padding interno do main: 16px (mobile) → 32px (desktop) */
+  --pad-side: clamp(16px, 3vw, 32px);
+  /* padding interno do painel: 20px (mobile) → 32px (desktop) */
+  --pad-painel: clamp(20px, 2vw, 32px);
+}
+
+.painel, .painel-avatar, .btn, .g-logo-bg, .feature::before,
+.theme-toggle, .dev-toggle {
+  transition: background-color 0.25s ease, color 0.25s ease,
+              border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* === LAYOUT — main ocupa viewport inteiro e centraliza o .split === */
+body {
+  display: grid;
+  grid-template-rows: 1fr;
+  place-items: center;
+  padding: 80px var(--pad-side) 60px;
+}
+main {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+/* === SPLIT (coluna + painel) === */
+.split {
+  display: flex; flex-direction: column;
+  gap: var(--gap-col);
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 860px) {
+  .split {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--gap-col);
+    align-items: center;
+  }
+}
+
+.col-identidade {
+  display: flex; flex-direction: column;
+  gap: clamp(14px, 1.5vw, 20px);
+}
+
+/* === TIPOGRAFIA DINÂMICA === */
+.eyebrow {
+  /* 11px → 13px */
+  font-size: clamp(11px, 0.4vw + 0.55rem, 13px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: clamp(2px, 0.4vw, 3px);
+  color: var(--accent);
+}
+
+h1 {
+  font-weight: 700;
+  /* 30px (320px viewport) → 52px (1440px+) */
+  font-size: clamp(30px, 4vw + 0.5rem, 52px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  max-width: 22ch;
+}
+h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.sub-headline {
+  /* 14px → 17px */
+  font-size: clamp(14px, 0.6vw + 0.5rem, 17px);
+  line-height: 1.6;
+  color: var(--fg-soft);
+  max-width: 50ch;
+}
+
+.features {
+  list-style: none;
+  margin-top: clamp(4px, 0.5vw, 8px);
+  display: flex; flex-direction: column;
+  gap: clamp(8px, 0.6vw, 12px);
+  max-width: 460px;
+}
+.feature {
+  display: flex; align-items: center; gap: clamp(10px, 0.8vw, 14px);
+  /* 13px → 15px */
+  font-size: clamp(13px, 0.4vw + 0.55rem, 15px);
+  color: var(--fg-soft);
+}
+.feature::before {
+  content: "";
+  display: inline-block;
+  width: clamp(5px, 0.3vw + 4px, 7px);
+  height: clamp(5px, 0.3vw + 4px, 7px);
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* === PAINEL === */
+.painel {
+  background: var(--bg-panel);
+  border: 1px solid var(--rule);
+  border-radius: clamp(8px, 0.6vw, 12px);
+  padding: clamp(20px, 2vw, 32px) clamp(20px, 2.2vw, 36px) clamp(22px, 2.2vw, 36px);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 460px;
+}
+
+.painel-header {
+  display: flex; align-items: center; gap: clamp(12px, 1vw, 16px);
+  margin-bottom: clamp(20px, 1.8vw, 28px);
+}
+.painel-avatar {
+  /* 56px → 72px */
+  width: clamp(56px, 3.5vw + 0.5rem, 72px);
+  height: clamp(56px, 3.5vw + 0.5rem, 72px);
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--rule-strong);
+}
+.painel-titulo {
+  font-weight: 600;
+  font-size: clamp(16px, 0.5vw + 0.7rem, 20px);
+  color: var(--fg);
+  line-height: 1.2;
+}
+.painel-sub {
+  font-size: clamp(11px, 0.3vw + 0.5rem, 13px);
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+.cta-titulo {
+  font-size: clamp(10px, 0.2vw + 0.5rem, 12px);
+  font-weight: 600;
+  letter-spacing: clamp(1.5px, 0.3vw, 2.5px);
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  margin-bottom: clamp(6px, 0.6vw, 10px);
+}
+.cta-meta {
+  font-size: clamp(13px, 0.3vw + 0.6rem, 15px);
+  color: var(--fg-soft);
+  line-height: 1.5;
+  margin-bottom: clamp(14px, 1.2vw, 18px);
+}
+
+.btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(8px, 0.6vw, 12px);
+  width: 100%;
+  padding: clamp(12px, 0.8vw + 0.5rem, 16px) clamp(16px, 1vw + 0.7rem, 22px);
+  background: var(--accent);
+  color: var(--accent-on);
+  border: 1px solid var(--accent);
+  border-radius: clamp(5px, 0.3vw + 4px, 8px);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: clamp(14px, 0.4vw + 0.6rem, 16px);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+.g-logo-bg {
+  width: clamp(16px, 0.6vw + 14px, 20px);
+  height: clamp(16px, 0.6vw + 14px, 20px);
+  background: white;
+  border-radius: 3px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  padding: 1px;
+}
+.g-logo-bg svg { width: 100%; height: 100%; }
+
+/* === TOGGLE DE TEMA === */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  display: grid; place-items: center;
+  background: var(--bg-panel);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--fg-soft);
+  box-shadow: var(--shadow-md);
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle:active { transform: scale(0.95); }
+.theme-toggle svg {
+  width: clamp(16px, 0.8vw + 12px, 22px);
+  height: clamp(16px, 0.8vw + 12px, 22px);
+}
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="light"] .icon-moon { display: block; }
+
+/* === DEV TOGGLE === */
+/* Posicionado do lado esquerdo do theme-toggle, mesmo Y. */
+.dev-toggle {
+  position: fixed;
+  top: 16px;
+  /* theme-toggle: 40px de largura + 8px de gap + margem direita 16px = 64px */
+  right: 64px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  display: grid; place-items: center;
+  background: var(--bg-panel);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--fg-soft);
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+}
+.dev-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.dev-toggle:active { transform: scale(0.95); }
+.dev-toggle svg { width: clamp(14px, 0.6vw + 12px, 18px); height: clamp(14px, 0.6vw + 12px, 18px); }
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* === MOBILE — TABLET E CELULAR === */
+/* Em telas <= 768px: split vira vertical (identidade em cima, painel embaixo).
+   Conteúdo centralizado, sem perder nenhuma informação. */
+@media (max-width: 768px) {
+  body {
+    padding: clamp(56px, 6vw, 70px) var(--pad-side) clamp(32px, 4vw, 44px);
+    /* Garante scroll natural quando conteúdo > viewport */
+    align-items: flex-start;
+  }
+  .split { gap: clamp(28px, 5vw, 44px); }
+  h1 { max-width: 100%; }    /* Solta a largura máxima do título no tablet */
+  .painel { max-width: 100%; }
+}
+
+/* Celular pequeno (<= 480px) */
+@media (max-width: 480px) {
+  body { padding: 56px 16px 28px; }
+  .dev-toggle { right: 64px; }
+  h1 {
+    /* Limita tamanho no celular pra não dominar a tela */
+    font-size: clamp(26px, 8vw, 36px);
+  }
+  .features { gap: 8px; }
+  .painel { padding: 18px 18px 22px; }
+  .painel-avatar { width: clamp(48px, 12vw, 64px); height: clamp(48px, 12vw, 64px); }
+}

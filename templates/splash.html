@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marc.IA · Splash</title>
+  <meta name="theme-color" content="#0F1419" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='splash.css') }}">
+</head>
+<body>
+
+  <!-- DEV: alterna entre splash e tutor sem login (só visível em modo dev) -->
+  {% if dev_mode %}
+  <a href="/chat-direct" class="dev-toggle" title="DEV: pular pro tutor sem login" aria-label="DEV: ir pro tutor">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </a>
+  {% endif %}
+
+  <!-- Toggle de tema -->
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Mudar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <main>
+
+    <section class="split">
+
+      <div class="col-identidade">
+        <p class="eyebrow">Bem-vindo de volta</p>
+
+        <h1>
+          Sua trilha de <em>Introdução à Programação</em>, com você em qualquer lugar.
+        </h1>
+
+        <p class="sub-headline">
+          Continue de onde parou, em qualquer dispositivo. O Marc.IA te conhece, e seu progresso fica salvo entre sessões quando você entra com a conta Google.
+        </p>
+
+        <ul class="features" aria-label="O que vem com a conta">
+          <li class="feature">Progresso entre dispositivos</li>
+          <li class="feature">Histórico de conversas</li>
+          <li class="feature">Checkpoint retomado de onde parou</li>
+        </ul>
+      </div>
+
+      <div class="painel" role="region" aria-label="Acessar o Marc.IA">
+
+        <header class="painel-header">
+          <img class="painel-avatar"
+               src="{{ url_for('static', filename='img/marc_ia_logo.png') }}"
+               alt="Marc.IA — PyAI Professor">
+          <div>
+            <div class="painel-titulo">Marc.IA</div>
+            <div class="painel-sub">Tutor · UFCAT</div>
+          </div>
+        </header>
+
+        <p class="cta-titulo">Acessar</p>
+        <p class="cta-meta">Faça login com sua conta Google para manter seu progresso</p>
+
+        <a href="{{ url_for('auth_login') }}" class="btn">
+          <span class="g-logo-bg" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+              <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+              <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+              <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+            </svg>
+          </span>
+          <span>Entrar com Google</span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'marcia-theme';
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        toggle.setAttribute('aria-label',
+          theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro');
+        try { localStorage.setItem(STORAGE_KEY, theme); } catch (_) {}
+      }
+
+      function getInitialTheme() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (saved === 'light' || saved === 'dark') return saved;
+        } catch (_) {}
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark' : 'light';
+      }
+
+      applyTheme(getInitialTheme());
+
+      toggle.addEventListener('click', function () {
+        const current = root.getAttribute('data-theme') || 'dark';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        try { if (localStorage.getItem(STORAGE_KEY)) return; } catch (_) {}
+        applyTheme(e.matches ? 'dark' : 'light');
+      });
+    })();
+  </script>
+</body>
+</html>
