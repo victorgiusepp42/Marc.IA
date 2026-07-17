@@ -229,6 +229,24 @@ def health():
     return jsonify({"status": "ok"}), 200
 
 
+@app.route("/debug-proxy", methods=["GET"])
+def debug_proxy():
+    """Rota TEMPORÁRIA de diagnóstico: mostra o que o Flask vê dos headers
+    de proxy e que URL ele geraria pra um callback. Remover depois."""
+    from flask import url_for, request
+    return jsonify({
+        "scheme_visto_pelo_flask": request.scheme,
+        "host_visto_pelo_flask": request.host,
+        "headers_recebidos": dict(request.headers),
+        "url_callback_gerada": url_for("auth_callback", _external=True),
+        "wsgi_app_class": type(app.wsgi_app).__name__,
+        "wsgi_app_attrs": {
+            k: v for k, v in vars(app.wsgi_app).items()
+            if not k.startswith("_") and isinstance(v, (int, str, bool))
+        },
+    }), 200
+
+
 # === Rotas de autenticação ===
 @app.route("/auth/login", methods=["GET"])
 def auth_login():
