@@ -44,12 +44,14 @@ app = Flask(__name__)
 # internas como http://, o que quebra o OAuth do Google (recusa
 # redirect_uri HTTP fora de localhost).
 #
-# x_proto=1: confia no header X-Forwarded-Proto (1 hop = Railway proxy)
-# x_host=1:  confia no X-Forwarded-Host pra preservar o host original
+# x_proto=2: confia até em 2 hops de X-Forwarded-Proto (edge + interno
+# do Railway; em testes x_proto=1 não pegava)
+# x_host=2:  idem pra X-Forwarded-Host
+# x_for=1:   confia em 1 hop de X-Forwarded-For (preserva IP do cliente)
 #
 # Em dev local (sem proxy) esses headers não existem → comportamento
 # padrão (http://127.0.0.1:5000) continua igual.
-app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=2, x_host=2, x_for=1)
 
 # === Configuração dos bancos de dados ===
 # Banco principal: marcia.db (sessoes, perfis de aluno)
