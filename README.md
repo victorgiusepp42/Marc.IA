@@ -12,7 +12,6 @@ Desenvolvido como projeto final da disciplina de Introdução à Programação �
 - Rota de aprendizado com 10 tópicos de Python (navegação livre)
 - Autenticação via Google OAuth (@discente.ufcat.edu.br)
 - RAG, respostas contextualizadas com materiais do professor (ChromaDB)
-- Sistema de XP e níveis (Aprendiz → Mestre)
 - Exercícios com feedback e progressão
 - Persistência via SQLAlchemy (SQLite dev / PostgreSQL prod)
 - Métricas de qualidade: feedback por resposta, NPS, Sean Ellis
