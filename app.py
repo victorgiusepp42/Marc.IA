@@ -12,6 +12,7 @@ import traceback
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from src.database import db
 from src.models import Sessao, LogExecucao, LogErro, Feedback, Metrica
@@ -36,6 +37,20 @@ load_dotenv()
 # Inicializa Flask
 app = Flask(__name__)
 
+# === ProxyFix ===
+# Railway (e qualquer PaaS) termina TLS no proxy de borda e repassa a
+# requisição pro container via HTTP interno. Sem ProxyFix, o Flask não
+# sabe que a conexão ORIGINAL do usuário era HTTPS — e gera URLs
+# internas como http://, o que quebra o OAuth do Google (recusa
+# redirect_uri HTTP fora de localhost).
+#
+# x_proto=1: confia no header X-Forwarded-Proto (1 hop = Railway proxy)
+# x_host=1:  confia no X-Forwarded-Host pra preservar o host original
+#
+# Em dev local (sem proxy) esses headers não existem → comportamento
+# padrão (http://127.0.0.1:5000) continua igual.
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
 # === Configuração dos bancos de dados ===
 # Banco principal: marcia.db (sessoes, perfis de aluno)
 # Banco de logs: logs.db (execucoes, erros) — engine separado via BIND_KEYS
@@ -43,10 +58,27 @@ app = Flask(__name__)
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATA_DIR}/marcia.db"
-app.config["SQLALCHEMY_BINDS"] = {
-    "logs": f"sqlite:///{DATA_DIR}/logs.db",
-}
+# === Banco de dados ===
+# Prioriza DATABASE_URL quando setada (produção: Postgres do Railway).
+# Fallback pra SQLite local quando não tem (dev local do Victor).
+# Em prod Railway, DATABASE_URL vem injetada automaticamente como referência
+# ${{ Postgres.DATABASE_URL }} — nesse caso a engine SESSION é Postgres.
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    # Railway injeta "postgres://" mas SQLAlchemy 2.x prefere "postgresql://"
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+    # Em prod usamos o MESMO banco pra logs (bind_key aponta pra mesma engine)
+    app.config["SQLALCHEMY_BINDS"] = {
+        "logs": DATABASE_URL,
+    }
+else:
+    # Dev local: SQLite com fallback pros 2 arquivos (sessoes + logs separados)
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DATA_DIR}/marcia.db"
+    app.config["SQLALCHEMY_BINDS"] = {
+        "logs": f"sqlite:///{DATA_DIR}/logs.db",
+    }
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Inicializa SQLAlchemy com a app
