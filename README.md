@@ -1,4 +1,4 @@
-# Marc.IA — Tutor Inteligente para Disciplinas do Curso de IA 🤖
+# Marc.IA — Tutor Inteligente para Disciplinas do Curso de IA 
 
 Plataforma web de ensino adaptativo com tutor IA. Baliza o acesso à aprendizagem via inteligência artificial para alunos do curso de Bacharelado em IA da UFCAT. Oferece rota estruturada para quem precisa e liberdade total para quem não precisa, sempre com contexto da disciplina específica.
 
@@ -6,22 +6,21 @@ Desenvolvido como projeto final da disciplina de Introdução à Programação �
 
 ---
 
-## 📋 Funcionalidades
+## Funcionalidades
 
 - Chat interativo com tutor IA (persona PyAI Professor)
 - Rota de aprendizado com 10 tópicos de Python (navegação livre)
 - Autenticação via Google OAuth (@discente.ufcat.edu.br)
-- RAG — respostas contextualizadas com materiais do professor (ChromaDB)
+- RAG, respostas contextualizadas com materiais do professor (ChromaDB)
 - Sistema de XP e níveis (Aprendiz → Mestre)
 - Exercícios com feedback e progressão
 - Persistência via SQLAlchemy (SQLite dev / PostgreSQL prod)
 - Métricas de qualidade: feedback por resposta, NPS, Sean Ellis
-- Interface retro 8-bit responsiva
 - Fallback automático de modelo (Opus 4.8 → Sonnet 4.6)
 
 ---
 
-## 🚀 Como Rodar
+## Como Rodar
 
 ### Pré-requisitos
 
@@ -67,7 +66,7 @@ Acesse **http://localhost:5000** no navegador.
 
 ---
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 ```
 Marc.IA/
@@ -123,7 +122,7 @@ Aluno digita pergunta
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 | Tecnologia | Uso |
 |---|---|
@@ -141,7 +140,7 @@ Aluno digita pergunta
 
 ---
 
-## 📚 Conceitos de Programação Utilizados
+## Conceitos de Programação Utilizados
 
 1. **Variáveis e tipos** — str, int, list, dict, bool em todos os módulos
 2. **Condicionais (if/elif/else)** — validação de input, cálculo de nível, fluxo de decisão
@@ -154,7 +153,7 @@ Aluno digita pergunta
 
 ---
 
-## 📖 Documentação
+## Documentação
 
 | Documento | Descrição |
 |---|---|
@@ -166,18 +165,18 @@ Aluno digita pergunta
 
 ---
 
-## 👥 Equipe
+## Equipe
 
 | Nome | RA | Papel |
 |---|---|---|
 | Diogo Alves Ribeiro | 202600442 | Líder formal + Front-end |
 | Victor Giusepp Almeida | 202600434 | Core IA + Coordenação técnica |
 | Kevynson Gabriel Silva | 202600450 | Back-end / DevOps |
-| Natan Alves Cotinguiba Araujo | 202601003 | Core IA + Testes |
+| Natan Rodrigues Cotinguiba Araujo | 202601003 | Core IA + Testes |
 
 ---
 
-## 📄 Licença
+## Licença
 
 Projeto acadêmico — UFCAT/IMTec, Bacharelado em Inteligência Artificial, 2026.
 
