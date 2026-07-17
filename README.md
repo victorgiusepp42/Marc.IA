@@ -171,9 +171,8 @@ Aluno digita pergunta
 |---|---|---|
 | Diogo Alves Ribeiro | 202600442 | Líder formal + Front-end |
 | Victor Giusepp Almeida | 202600434 | Core IA + Coordenação técnica |
-| Kevynson Gabriel Silva | 202600450 | Back-end / DevOps |
-| Natan Rodrigues Cotinguiba Araujo | 202601003 | Core IA + Testes |
-
+| Natan Rodrigues Cotinguiba Araujo | 202601003 | Back-end / DevOps |
+| Nilvania Oliveira de Sousa | 202601016 | Core IA + Testes |
 ---
 
 ## Licença
