@@ -86,15 +86,18 @@ def init_auth(app):
 
 
 def _email_permitido(email: str) -> bool:
-    """Checa se o email está no domínio institucional.
+    """Valida se o email pode logar no app.
 
-    Em dev com DEV_PERMITIR_LOGIN_LIVRE=1, aceita qualquer email válido
-    (útil pra testar antes de configurar test users no Google Cloud).
+    Decisão final (2026-07-17, decisão de produto do Victor):
+    qualquer email Google válido pode logar — não restringimos mais
+    ao domínio @discente.ufcat.edu.br. Isso simplifica onboarding
+    de alunos externos, professores visitantes e a própria demo
+    da banca (que usa Gmail pessoal).
+
+    Mantemos a função pra futuro caso queiramos reintroduzir
+    restrição (ex: alunos de outra IES).
     """
-    if os.getenv("DEV_PERMITIR_LOGIN_LIVRE") == "1":
-        return bool(email)
-    dominio = os.getenv("DOMINIO_ALUNO", "@discente.ufcat.edu.br")
-    return email.lower().endswith(dominio.lower())
+    return bool(email and "@" in email)
 
 
 def login_via_google():
@@ -140,12 +143,11 @@ def callback_google():
         return _erro_oauth("Conta Google sem dados essenciais (id/email).")
 
     if not _email_permitido(email):
-        dominio = os.getenv("DOMINIO_ALUNO", "@discente.ufcat.edu.br")
-        logger.warning("login recusado — email fora do domínio: %s", email)
-        return _erro_oauth(
-            f"Acesso restrito a alunos UFCAT ({dominio}). "
-            f"Sua conta ({email}) não se qualifica."
-        )
+        # A partir de 2026-07-17 (decisão de produto), qualquer email
+        # Google válido é aceito. Esse bloco só roda se _email_permitido()
+        # for customizada no futuro pra reintroduzir restrição.
+        logger.warning("login bloqueado por política de domínio: %s", email)
+        return _erro_oauth("Sua conta não tem permissão de acesso.")
 
     # Upsert no banco
     usuario = db.session.query(Usuario).filter_by(google_id=google_id).first()
