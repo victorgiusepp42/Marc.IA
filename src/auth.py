@@ -103,6 +103,14 @@ def _email_permitido(email: str) -> bool:
 def login_via_google():
     """Inicia o fluxo OAuth redirecionando pro Google."""
     redirect_uri = url_for("auth_callback", _external=True)
+    # Em produção o Railway termina TLS no proxy de borda e repassa via
+    # HTTP interno. Mesmo com ProxyFix do werkzeug (x_proto=2), às vezes
+    # o Flask ainda vê "http" no scheme. Como o Google exige redirect_uri
+    # HTTPS (exceto localhost), forçamos manualmente quando detectamos que
+    # o host NÃO é localhost/127.0.0.1.
+    if not redirect_uri.startswith("http://localhost") and \
+       not redirect_uri.startswith("http://127.0.0.1"):
+        redirect_uri = redirect_uri.replace("http://", "https://", 1)
     return oauth.google.authorize_redirect(redirect_uri)
 
 

@@ -37,3 +37,5 @@ client_*_apps.googleusercontent.com.json
 # Controle pessoal de Victor — separa o que foi feito por IA vs humano.
 # Documenta aprendizado e processo, não é parte do produto.
 docs/MEMORIAL_IA/
+test_*.json
+debug*.json
