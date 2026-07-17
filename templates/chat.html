@@ -35,6 +35,21 @@
         </svg>
     </button>
 
+    {% if current_user.is_authenticated %}
+    <!-- Botão de logout (só aparece quando logado via OAuth).
+         Posicionado À ESQUERDA do theme-toggle, mesmo Y. -->
+    <a href="/auth/logout" class="logout-toggle"
+       title="Sair ({{ current_user.nome or current_user.email }})"
+       aria-label="Sair da conta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Ícone: porta+seta de logout (lucide style) -->
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+    </a>
+    {% endif %}
+
     <!-- Canvas de partículas espaciais (só tema dark) -->
 
     <!-- Onboarding "Boot Sequence" (aparece 1x por aluno) -->

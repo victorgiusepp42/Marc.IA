@@ -158,11 +158,19 @@ def index():
     """
     # Modo dev: pula direto pro tutor sem login (usado pelo Diogo no fluxo de prototipagem)
     if DEV_AUTO_LOGIN:
-        return render_template("chat.html", dev_mode=DEV_AUTO_LOGIN)
+        return render_template(
+            "chat.html",
+            dev_mode=DEV_AUTO_LOGIN,
+            current_user=current_user,
+        )
 
     if current_user.is_authenticated:
-        return render_template("chat.html", dev_mode=DEV_AUTO_LOGIN)
-    return render_template("splash.html", dev_mode=DEV_AUTO_LOGIN)
+        return render_template(
+            "chat.html",
+            dev_mode=DEV_AUTO_LOGIN,
+            current_user=current_user,
+        )
+    return render_template("splash.html", dev_mode=DEV_AUTO_LOGIN, current_user=current_user)
 
 
 @app.route("/chat-direct")
@@ -178,7 +186,7 @@ def chat_direct():
     """
     if not DEV_AUTO_LOGIN:
         return jsonify({"erro": "Not Found"}), 404
-    return render_template("chat.html", dev_mode=DEV_AUTO_LOGIN)
+    return render_template("chat.html", dev_mode=DEV_AUTO_LOGIN, current_user=current_user)
 
 
 @app.route("/health", methods=["GET"])
@@ -903,4 +911,9 @@ def admin_logs():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    # Em produção (PaaS como Railway/Render): o Procfile roda gunicorn,
+    # então este bloco SÓ executa em dev local. Em prod, debug NUNCA pode ser True
+    # (vaza traceback + permite execução arbitrária via Werkzeug debugger).
+    debug = os.getenv("FLASK_DEBUG", "0") == "1"
+    port = int(os.getenv("PORT", "5000"))
+    app.run(debug=debug, host="127.0.0.1", port=port)

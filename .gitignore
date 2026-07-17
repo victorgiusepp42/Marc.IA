@@ -26,6 +26,9 @@ data/benchmark_run.log
 # --- Credenciais (Google Sheets pausado em 01/07/2026; ver TASK-PAUSADAS) ---
 credentials/
 *.json.key
+# Downloads do Google Cloud Console (OAuth Client secrets) — NUNCA subir
+client_secret_*.json
+client_*_apps.googleusercontent.com.json
 
 # Google Sheets API (pausado em 01/07/2026 — ver TASK-PAUSADAS)
 # Quando reativar, gerar credenciais e voltar a pasta credentials/

@@ -121,6 +121,41 @@ html, body {
     }
 }
 
+/* === LOGOUT TOGGLE ===
+   Aparece À ESQUERDA do theme-toggle quando o aluno está logado.
+   Mesma estética (40×40 fixo, círculo com blur), diferenciado só pelo
+   gesto :hover em vermelho pra deixar claro que é ação destrutiva. */
+.logout-toggle {
+    position: fixed;
+    top: 16px;
+    right: 64px;       /* mesmo X do dev-toggle — theme-toggle fica 16+40=56px à direita */
+    z-index: 100;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    background: var(--bg-panel);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--fg-soft);
+    text-decoration: none;
+}
+.logout-toggle:hover {
+    color: #F85149;                         /* vermelho GitHub danger */
+    border-color: #F85149;
+}
+.logout-toggle:active { transform: scale(0.95); }
+.logout-toggle svg { width: 18px; height: 18px; }
+@media (min-width: 860px) {
+    .logout-toggle {
+        top: clamp(14px, 1.4vw, 22px);
+        right: calc(clamp(36px, 2vw + 28px, 40px) + 8px + clamp(14px, 1.4vw, 22px));
+    }
+}
+
 /* === HEADER === */
 .app-header {
     position: relative; z-index: 5;
